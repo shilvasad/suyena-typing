@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suyena Typing Test</title>
+    <!-- Google Fonts for a modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+        PHASE 3.1: APPLICATION STYLES
+        ========================================
+        This section contains all the CSS for the application.
+        The design is clean, modern, and fully responsive.
+        A dark theme is used for better visual comfort.
+        */
+
+        :root { /* Default Amethyst Theme */
+            --surface-color: rgba(255, 255, 255, 0.6);
+            --primary-color: #7c3aed;
+            --primary-color-rgb: 124, 58, 237;
+            --text-color: #1c1e21;
+            --text-secondary-color: #606770;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --background-color-internal: rgba(240, 242, 245, 0.7);
+            --correct-color: #16a34a;
+            --incorrect-color: #dc2626;
+        }
+
+        body[data-theme="dark"] {
+            --surface-color: rgba(30, 30, 30, 0.6);
+            --primary-color: #03dac6;
+            --primary-color-rgb: 3, 218, 198;
+            --text-color: #e0e0e0;
+            --text-secondary-color: #a0a0a0;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --background-color-internal: rgba(18, 18, 18, 0.7);
+        }
+
+        body[data-theme="sunset"] {
+            --surface-color: rgba(40, 25, 50, 0.6);
+            --primary-color: #ff8c42;
+            --primary-color-rgb: 255, 140, 66;
+            --text-color: #f0e6ff;
+            --text-secondary-color: #d8c4e8;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --background-color-internal: rgba(60, 40, 70, 0.7);
+        }
+
+        body[data-theme="ocean"] {
+            --surface-color: rgba(20, 30, 40, 0.6);
+            --primary-color: #22d3ee;
+            --primary-color-rgb: 34, 211, 238;
+            --text-color: #e0f2fe;
+            --text-secondary-color: #a8d5e5;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --background-color-internal: rgba(30, 50, 70, 0.7);
+        }
+
+
+        /* Basic Resets */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            line-height: 1.6;
+            background-attachment: fixed;
+            transition: color 0.3s ease;
+            overflow: hidden; /* Hide scrollbars from animated background */
+        }
+        
+        /* Animated Gradient Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-size: 200% 200%;
+            animation: gradient-animation 20s ease infinite;
+            transition: background 0.8s ease;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body[data-theme="amethyst"]::before {
+            background-image:
+                radial-gradient(at 80% 20%, hsla(300, 80%, 90%, 0.9) 0px, transparent 50%),
+                radial-gradient(at 20% 90%, hsla(240, 90%, 85%, 0.8) 0px, transparent 50%),
+                radial-gradient(at 0% 0%, hsla(160, 70%, 90%, 0.7) 0px, transparent 50%);
+            background-color: #f0f2f5;
+        }
+        body[data-theme="dark"]::before {
+            background-image: 
+                radial-gradient(at 80% 20%, hsla(174, 95%, 40%, 0.3) 0px, transparent 50%),
+                radial-gradient(at 20% 90%, hsla(300, 45%, 35%, 0.25) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(220, 35%, 25%, 0.2) 0px, transparent 50%);
+            background-color: #121212;
+        }
+        body[data-theme="sunset"]::before {
+            background-image:
+                radial-gradient(at 10% 10%, hsla(25, 100%, 63%, 0.4) 0px, transparent 50%),
+                radial-gradient(at 80% 90%, hsla(340, 80%, 70%, 0.35) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(280, 50%, 60%, 0.2) 0px, transparent 50%);
+            background-color: #1a0b2e;
+        }
+        body[data-theme="ocean"]::before {
+            background-image:
+                radial-gradient(at 80% 20%, hsla(187, 82%, 66%, 0.4) 0px, transparent 50%),
+                radial-gradient(at 20% 90%, hsla(220, 70%, 60%, 0.35) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(160, 50%, 50%, 0.2) 0px, transparent 50%);
+            background-color: #0b192f;
+        }
+
+
+        /* Main Container - Glassmorphism */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 2.5rem;
+            background-color: var(--surface-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            position: relative;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Theme Switcher Icon */
+        #themeSwitcher {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary-color);
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #themeSwitcher:hover {
+            background-color: var(--border-color);
+            color: var(--primary-color);
+        }
+
+        #themeSwitcher svg {
+            display: block;
+        }
+
+        /* Header */
+        .header h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.3);
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        .header p {
+            text-align: center;
+            color: var(--text-secondary-color);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        /* Options Bar */
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+        
+        .option-group label {
+            font-size: 0.9rem;
+            color: var(--text-secondary-color);
+        }
+
+        select {
+            padding: 0.75rem;
+            background-color: var(--background-color-internal);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-family: inherit;
+            width: 100%;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        #startButton {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease, color 0.3s ease;
+            flex-shrink: 0;
+            align-self: flex-end; /* Aligns with the bottom of the input */
+        }
+        
+        #startButton:hover {
+            opacity: 0.9;
+        }
+
+        #startButton:active {
+            transform: scale(0.98);
+        }
+
+        #startButton:disabled {
+            background-color: #555;
+            color: #888;
+            cursor: not-allowed;
+        }
+
+        /* Stats Display */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--background-color-internal);
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        .stat {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-value {
+             color: var(--primary-color);
+             transition: color 0.3s ease;
+        }
+
+        /* Typing Area */
+        #wordsWrapper {
+            font-size: 1.8rem;
+            letter-spacing: 1.5px;
+            line-height: 2.2;
+            padding: 1.5rem;
+            background-color: var(--background-color-internal);
+            border-radius: 12px;
+            height: 160px;
+            overflow-y: auto;
+            color: var(--text-secondary-color);
+            margin-bottom: 1.5rem;
+            transition: background-color 0.3s ease;
+            display: flex; /* Use flexbox for wrapping */
+            flex-wrap: wrap; /* Allow words to wrap to the next line */
+            align-content: flex-start; /* Align lines to the top */
+        }
+        
+        #wordsWrapper span {
+            margin-right: 0.6rem; /* Space between words */
+            margin-bottom: 0.6rem; /* Space between lines */
+            word-break: break-all; /* Break very long words */
+        }
+
+        #wordsWrapper .loading-text {
+            width: 100%;
+            text-align: center;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        #wordsWrapper span.correct {
+            color: var(--correct-color);
+        }
+        
+        #wordsWrapper span.incorrect {
+            color: var(--incorrect-color);
+            text-decoration: underline;
+        }
+
+        #wordsWrapper span.current {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border-radius: 6px;
+            padding: 2px 6px;
+            border-bottom: 3px solid rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* User Input Field */
+        #userInput {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.8rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background-color: var(--background-color-internal);
+            color: var(--text-color);
+            font-family: inherit;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        #userInput:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        #userInput:disabled {
+            background-color: var(--surface-color);
+        }
+
+        /* Final Results Section */
+        #results {
+            margin-top: 1.5rem;
+            text-align: center;
+            padding: 2rem;
+            background: var(--background-color-internal);
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+        }
+        
+        #results.hidden {
+            display: none;
+        }
+
+        #results h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        #results p {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+            .container {
+                padding: 1.5rem;
+            }
+            .options {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            #startButton {
+                width: 100%;
+                margin-top: 0.5rem;
+                align-self: auto;
+            }
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body data-theme="amethyst">
+
+    <main class="container">
+        <header class="header">
+            <h1>Suyena Typing Test</h1>
+            <p>Test your typing speed in multiple languages with AI-generated text.</p>
+            <button id="themeSwitcher" title="Change Theme">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"></circle><path d="M16.2 7.8a6 6 0 0 0-8.4 0"></path><path d="M7.8 16.2a6 6 0 0 0 8.4 0"></path><path d="M12 2a10 10 0 1 0 10 10"></path></svg>
+            </button>
+        </header>
+
+        <section class="options">
+            <div class="option-group">
+                <label for="languageSelect">Language</label>
+                <select id="languageSelect">
+                    <option value="Bengali">Bengali (বাংলা)</option>
+                    <option value="English" selected>English</option>
+                    <option value="Hindi">Hindi (हिन्दी)</option>
+                    <option value="Spanish">Spanish (Español)</option>
+                </select>
+            </div>
+            <div class="option-group">
+                <label for="durationSelect">Duration</label>
+                <select id="durationSelect">
+                    <option value="60">1 minute</option>
+                    <option value="180">3 minutes</option>
+                    <option value="300">5 minutes</option>
+                    <option value="600">10 minutes</option>
+                    <option value="900">15 minutes</option>
+                    <option value="1200">20 minutes</option>
+                    <option value="1800">30 minutes</option>
+                    <option value="2700">45 minutes</option>
+                    <option value="3600">1 hour</option>
+                    <option value="0">Infinite</option>
+                </select>
+            </div>
+            <button id="startButton">Start</button>
+        </section>
+
+        <section class="stats">
+            <div>
+                <div class="stat"><span id="wpmValue" class="stat-value">0</span></div>
+                <div class="stat-label">WPM</div>
+            </div>
+            <div>
+                <div class="stat"><span id="cpmValue" class="stat-value">0</span></div>
+                <div class="stat-label">CPM</div>
+            </div>
+            <div>
+                <div class="stat"><span id="accuracyValue" class="stat-value">100</span>%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+            <div>
+                <div class="stat"><span id="timeValue" class="stat-value">0:00</span></div>
+                <div class="stat-label">Time</div>
+            </div>
+        </section>
+
+        <div id="wordsWrapper">
+            Select your options and click "Start" to begin.
+        </div>
+        <input type="text" id="userInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" disabled>
+
+        <section id="results" class="hidden">
+            <h2>Time's Up!</h2>
+            <p id="finalWpm"></p>
+            <p id="finalCpm"></p>
+            <p id="finalAccuracy"></p>
+        </section>
+
+    </main>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const languageSelect = document.getElementById('languageSelect');
+        const durationSelect = document.getElementById('durationSelect');
+        const startButton = document.getElementById('startButton');
+        const wpmValue = document.getElementById('wpmValue');
+        const cpmValue = document.getElementById('cpmValue');
+        const accuracyValue = document.getElementById('accuracyValue');
+        const timeValue = document.getElementById('timeValue');
+        const wordsWrapper = document.getElementById('wordsWrapper');
+        const userInput = document.getElementById('userInput');
+        const resultsSection = document.getElementById('results');
+        const finalWpm = document.getElementById('finalWpm');
+        const finalCpm = document.getElementById('finalCpm');
+        const finalAccuracy = document.getElementById('finalAccuracy');
+        const themeSwitcher = document.getElementById('themeSwitcher');
+        const body = document.body;
+
+        let state = {
+            language: 'English',
+            duration: 60,
+            words: [],
+            currentWordIndex: 0,
+            timeRemaining: 60,
+            wpm: 0,
+            cpm: 0,
+            accuracy: 100,
+            gameState: 'waiting', // 'waiting', 'running', 'finished'
+            timerInterval: null,
+            startTime: 0,
+            totalTypedChars: 0,
+            correctTypedChars: 0,
+            correctTypedWords: 0,
+            isFetchingNextBatch: false, // Flag to prevent multiple fetches
+        };
+        
+        const themes = ['amethyst', 'dark', 'sunset', 'ocean'];
+        let currentThemeIndex = 0;
+        let loadingInterval = null;
+
+        const init = () => {
+            languageSelect.value = state.language;
+            durationSelect.value = state.duration;
+            updateTimeDisplay();
+            
+            userInput.addEventListener('keydown', handleKeyPress);
+            startButton.addEventListener('click', () => state.gameState === 'running' ? resetGame() : startGame());
+            languageSelect.addEventListener('change', (e) => state.language = e.target.value);
+            durationSelect.addEventListener('change', (e) => {
+                state.duration = parseInt(e.target.value, 10);
+                state.timeRemaining = state.duration;
+                updateTimeDisplay();
+            });
+            
+            themeSwitcher.addEventListener('click', switchTheme);
+            loadTheme();
+        };
+
+        const switchTheme = () => {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const newTheme = themes[currentThemeIndex];
+            body.dataset.theme = newTheme;
+            localStorage.setItem('typingTestTheme', newTheme);
+        };
+
+        const loadTheme = () => {
+            const savedTheme = localStorage.getItem('typingTestTheme') || 'amethyst';
+            currentThemeIndex = themes.indexOf(savedTheme);
+            if (currentThemeIndex === -1) currentThemeIndex = 0;
+            body.dataset.theme = themes[currentThemeIndex];
+        };
+
+        const startGame = async () => {
+            resetGame();
+            state.gameState = 'running';
+            updateUIForState();
+            userInput.disabled = false;
+            userInput.focus();
+            
+            // Start loading animation
+            const loadingMessages = ['Generating text.', 'Generating text..', 'Generating text...'];
+            let messageIndex = 0;
+            wordsWrapper.innerHTML = `<span class="loading-text">${loadingMessages[0]}</span>`;
+            loadingInterval = setInterval(() => {
+                messageIndex = (messageIndex + 1) % loadingMessages.length;
+                wordsWrapper.innerHTML = `<span class="loading-text">${loadingMessages[messageIndex]}</span>`;
+            }, 600);
+
+            try {
+                const text = await fetchTextFromAI(true); // Always fetch a small initial chunk
+                clearInterval(loadingInterval);
+                state.words = text.trim().split(' ');
+                renderWords();
+            } catch (error) {
+                clearInterval(loadingInterval);
+                console.error("Error fetching text from AI:", error);
+                wordsWrapper.innerHTML = `Error: ${error.message}. Please check your connection and try again.`;
+                resetGame();
+            }
+        };
+
+        const endGame = () => {
+            clearInterval(state.timerInterval);
+            state.gameState = 'finished';
+            calculateStats();
+            finalWpm.textContent = `WPM: ${state.wpm}`;
+            finalCpm.textContent = `CPM: ${state.cpm}`;
+            finalAccuracy.textContent = `Accuracy: ${state.accuracy}%`;
+            resultsSection.classList.remove('hidden');
+            userInput.disabled = true;
+            updateUIForState();
+        };
+
+        const resetGame = () => {
+            clearInterval(state.timerInterval);
+            clearInterval(loadingInterval);
+            Object.assign(state, {
+                gameState: 'waiting',
+                startTime: 0,
+                wpm: 0,
+                cpm: 0,
+                accuracy: 100,
+                totalTypedChars: 0,
+                correctTypedChars: 0,
+                correctTypedWords: 0,
+                currentWordIndex: 0,
+                words: [],
+                isFetchingNextBatch: false,
+            });
+            state.duration = parseInt(durationSelect.value, 10);
+            state.timeRemaining = state.duration;
+            userInput.value = '';
+            userInput.disabled = true;
+            wordsWrapper.innerHTML = 'Select your options and click "Start" to begin.';
+            resultsSection.classList.add('hidden');
+            updateStatsDisplay();
+            updateTimeDisplay();
+            updateUIForState();
+        };
+
+        const fetchTextFromAI = async (isInitialFetch = false) => {
+            const apiKey = "";
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            
+            // If it's the first fetch, always get a small chunk for a quick start.
+            // Otherwise, get a larger chunk for subsequent appends.
+            const wordCount = isInitialFetch ? 150 : 250;
+
+            const promptDetail = `a text of about ${wordCount} words suitable for a typing test. Do not include any formatting, titles, or introduction.`;
+            const prompt = `Generate ${promptDetail} in the ${state.language} language.`;
+            const requestBody = {
+                contents: [{ parts: [{ text: prompt }] }],
+                generationConfig: { temperature: 0.7, maxOutputTokens: 8192 }
+            };
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody)
+            });
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error?.message || `API request failed`);
+            }
+            const data = await response.json();
+            const rawText = data.candidates[0].content.parts[0].text;
+            return rawText.replace(/[\*#]/g, '').replace(/\s+/g, ' ').trim();
+        };
+        
+        const fetchAndAppendText = async () => {
+            state.isFetchingNextBatch = true;
+            try {
+                const text = await fetchTextFromAI(false); // Fetch a larger, subsequent chunk
+                const newWords = text.trim().split(' ');
+                state.words.push(...newWords);
+                appendWordsToDOM(newWords);
+            } catch (error) {
+                console.error("Error fetching next batch of text:", error);
+            } finally {
+                state.isFetchingNextBatch = false;
+            }
+        };
+
+        const appendWordsToDOM = (newWords) => {
+            newWords.forEach(word => {
+                const wordSpan = document.createElement('span');
+                wordSpan.textContent = word;
+                wordsWrapper.appendChild(wordSpan);
+            });
+        };
+
+        const renderWords = () => {
+            wordsWrapper.innerHTML = '';
+            wordsWrapper.style.fontFamily = state.language === 'Bengali' ? 'var(--font-bengali)' : 'var(--font-primary)';
+            state.words.forEach(word => {
+                const wordSpan = document.createElement('span');
+                wordSpan.textContent = word;
+                wordsWrapper.appendChild(wordSpan);
+            });
+            if (wordsWrapper.children.length > 0) {
+                wordsWrapper.children[0].classList.add('current');
+            }
+        };
+
+        const updateUIForState = () => {
+            startButton.textContent = state.gameState === 'running' ? 'Restart' : 'Start';
+            languageSelect.disabled = state.gameState === 'running';
+            durationSelect.disabled = state.gameState === 'running';
+        };
+        
+        const updateStatsDisplay = () => {
+            wpmValue.textContent = state.wpm;
+            cpmValue.textContent = state.cpm;
+            accuracyValue.textContent = state.accuracy;
+        };
+
+        const updateTimeDisplay = () => {
+            const minutes = Math.floor(state.timeRemaining / 60);
+            const seconds = state.timeRemaining % 60;
+            timeValue.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        };
+
+        const startTimer = () => {
+            clearInterval(state.timerInterval);
+            state.timeRemaining = state.duration === 0 ? 0 : state.duration;
+            updateTimeDisplay();
+            state.timerInterval = setInterval(() => {
+                state.duration === 0 ? state.timeRemaining++ : state.timeRemaining--;
+                updateTimeDisplay();
+                calculateStats();
+                updateStatsDisplay();
+                if (state.duration !== 0 && state.timeRemaining <= 0) {
+                    endGame();
+                }
+            }, 1000);
+        };
+        
+        const handleKeyPress = (e) => {
+            if (state.gameState !== 'running') return;
+            if (state.startTime === 0 && e.key !== ' ' && e.key !== 'Backspace') {
+                state.startTime = Date.now();
+                startTimer();
+            }
+
+            if (e.key === ' ') {
+                e.preventDefault();
+                validateWord();
+            }
+        };
+
+        const validateWord = () => {
+            const typedWord = userInput.value.trim();
+            if (typedWord === '') return;
+
+            const currentWord = state.words[state.currentWordIndex];
+            const wordSpan = wordsWrapper.children[state.currentWordIndex];
+            
+            wordSpan.classList.remove('current');
+            state.totalTypedChars += currentWord.length + 1; // +1 for the space
+
+            if (typedWord === currentWord) {
+                wordSpan.classList.add('correct');
+                state.correctTypedChars += currentWord.length + 1;
+                state.correctTypedWords++; // Increment correct word count
+            } else {
+                wordSpan.classList.add('incorrect');
+            }
+
+            state.currentWordIndex++;
+
+            // For any test longer than 3 minutes, fetch more text
+            const isLongTest = state.duration === 0 || state.duration > 180;
+            const wordsRemaining = state.words.length - state.currentWordIndex;
+            
+            if (isLongTest && !state.isFetchingNextBatch && wordsRemaining < 40) {
+                fetchAndAppendText();
+            }
+
+            if (state.currentWordIndex >= state.words.length) {
+                // Only end if it's not a long/infinite test that's still fetching
+                if (!isLongTest) endGame(); 
+                return;
+            }
+
+            const nextWordSpan = wordsWrapper.children[state.currentWordIndex];
+            nextWordSpan.classList.add('current');
+            nextWordSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            userInput.value = '';
+        };
+
+        const calculateStats = () => {
+            if (state.startTime === 0) return;
+            const timeElapsedInSeconds = (Date.now() - state.startTime) / 1000;
+            if (timeElapsedInSeconds > 0) {
+                const timeElapsedInMinutes = timeElapsedInSeconds / 60;
+                // New WPM calculation based on actual correct words
+                state.wpm = Math.round(state.correctTypedWords / timeElapsedInMinutes) || 0;
+                // CPM is based on correct characters per minute
+                state.cpm = Math.round(state.correctTypedChars / timeElapsedInMinutes) || 0;
+            }
+            state.accuracy = state.totalTypedChars > 0 ? Math.round((state.correctTypedChars / state.totalTypedChars) * 100) : 100;
+        };
+
+        init();
+    });
+    </script>
+</body>
+</html>
