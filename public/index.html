@@ -9,7 +9,7 @@
     <!-- Google Fonts for a modern look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     
     <style>
         /* ========================================
@@ -33,6 +33,7 @@
             --font-primary: 'Poppins', sans-serif;
             --font-bengali: 'Noto Sans Bengali', sans-serif;
             --font-hindi: 'Noto Sans Devanagari', sans-serif;
+            --font-cursive: 'Dancing Script', cursive;
         }
 
         body[data-theme="dark"] {
@@ -81,14 +82,15 @@
             color: var(--text-color);
             font-family: var(--font-primary);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 1rem;
+            padding: 2rem 1rem;
             line-height: 1.6;
             background-attachment: fixed;
             transition: color 0.3s ease;
-            overflow: hidden; /* Hide scrollbars from animated background */
+            overflow-y: auto; /* Allow vertical scrolling */
         }
         
         /* Animated Gradient Background */
@@ -158,9 +160,11 @@
 
         /* Theme Switcher Icon */
         #themeSwitcher {
-            position: absolute;
+            position: sticky;
             top: 1.5rem;
-            right: 1.5rem;
+            float: right;
+            margin-bottom: -40px; /* Adjust to not interfere with header content */
+            z-index: 10;
             background: none;
             border: none;
             cursor: pointer;
@@ -402,6 +406,41 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Footer */
+        .footer {
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+
+        .footer p {
+            color: var(--text-secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer a.developer {
+            font-family: var(--font-cursive);
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--text-secondary-color), var(--primary-color), var(--text-secondary-color));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.5);
+            animation: gradient-text-flow 4s linear infinite;
+            transition: text-shadow 0.3s ease;
+        }
+
+        @keyframes gradient-text-flow {
+            0% { background-position: 200% center; }
+            100% { background-position: 0% center; }
+        }
+
+        .footer .copyright {
+            font-size: 0.8rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .options {
@@ -425,12 +464,12 @@
 <body data-theme="amethyst">
 
     <main class="container">
+        <button id="themeSwitcher" title="Change Theme">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"></circle><path d="M16.2 7.8a6 6 0 0 0-8.4 0"></path><path d="M7.8 16.2a6 6 0 0 0 8.4 0"></path><path d="M12 2a10 10 0 1 0 10 10"></path></svg>
+        </button>
         <header class="header">
             <h1>Suyena Typing Test</h1>
             <p>Test your typing speed in multiple languages with AI-generated text.</p>
-            <button id="themeSwitcher" title="Change Theme">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"></circle><path d="M16.2 7.8a6 6 0 0 0-8.4 0"></path><path d="M7.8 16.2a6 6 0 0 0 8.4 0"></path><path d="M12 2a10 10 0 1 0 10 10"></path></svg>
-            </button>
         </header>
 
         <section class="options">
@@ -530,8 +569,12 @@
             <p id="totalCharsTyped"></p>
             <p id="totalPagesTyped"></p>
         </section>
-
     </main>
+
+    <footer class="footer">
+        <p>Designed & Developed by <a href="https://asad.suyena.com" target="_blank" class="developer">Md Asad Chowdhary</a></p>
+        <p class="copyright">© <span id="copyrightYear"></span> Suyena Advance Society. All Rights Reserved.</p>
+    </footer>
     
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -567,6 +610,7 @@
         const totalPagesTyped = document.getElementById('totalPagesTyped');
         const themeSwitcher = document.getElementById('themeSwitcher');
         const body = document.body;
+        const copyrightYear = document.getElementById('copyrightYear');
 
         // State
         let state = {
@@ -874,6 +918,7 @@
         };
         
         const init = () => {
+            copyrightYear.textContent = new Date().getFullYear();
             loadPreferences();
             updateTimeDisplay();
             updateSubjectTranslations();
