@@ -429,7 +429,7 @@
             <h1>Suyena Typing Test</h1>
             <p>Test your typing speed in multiple languages with AI-generated text.</p>
             <button id="themeSwitcher" title="Change Theme">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"></circle><path d="M16.2 7.8a6 6 0 0 0-8.4 0"></path><path d="M7.8 16.2a6 6 0 0 0 8.4 0"></path><path d="M12 2a10 10 0 1 0 10 10"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"></circle><path d="M16.2 7.8a6 6 0 0 0-8.4 0"></path><path d="M7.8 16.2a6 6 0 0 0 8.4 0"></path><path d="M12 2a10 10 0 1 0 10 10"></path></svg>
             </button>
         </header>
 
@@ -533,9 +533,13 @@
 
     </main>
     
-    <script src="config.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // --- CONFIGURATION ---
+        // To use your own API key, replace "" with your key.
+        // If left blank, it will use the key provided by the environment.
+        const apiKey = "AIzaSyDMeorM8ab5DYNXHHlD3k9e0VTkTWeOXWA"; 
+
         // DOM Elements
         const languageSelect = document.getElementById('languageSelect');
         const durationSelect = document.getElementById('durationSelect');
@@ -579,7 +583,7 @@
         const subjectTranslations = {
             'English': { 'a random topic': 'Random', 'Technology': 'Technology', 'History': 'History', 'Science': 'Science', 'Self-Help': 'Self-Help', 'inspirational or motivational topics': 'Inspirational', 'assertiveness': 'Assertive', 'family': 'Family', 'relationships': 'Relationships', 'wellbeing': 'Wellbeing' },
             'Bengali': { 'a random topic': 'এলোমেলো', 'Technology': 'প্রযুক্তি', 'History': 'ইতিহাস', 'Science': 'বিজ্ঞান', 'Self-Help': 'আত্ম-সহায়তা', 'inspirational or motivational topics': 'অনুপ্রেরণামূলক', 'assertiveness': 'দৃঢ়তা', 'family': 'পরিবার', 'relationships': 'সম্পর্ক', 'wellbeing': 'সুস্থতা' },
-            'Hindi': { 'a random topic': 'यादृच्छिक', 'Technology': 'प्रौद्योगिकी', 'History': 'इतिहास', 'Science': 'विज्ञान', 'Self-Help': 'स्व-सहायता', 'inspirational or motivational topics': 'प्रेरणादायक', 'assertiveness': 'दृढ़ता', 'family': 'परिवार', 'relationships': 'रिश्ते', 'wellbeing': 'कल्याण' },
+            'Hindi': { 'a random topic': 'यादृच्छिक', 'Technology': 'प्रौद्योगिकी', 'History': 'इतिहास', 'Science': 'विज्ञान', 'Self-Help': 'स्व-सहायता', 'inspirational or motivational topics': 'प्रेरणादायक', 'assertiveness': 'दृढ़ता', 'family': 'परिवार', 'relationships': 'रिश्ते', 'wellbeing': 'কल्याण' },
             'Spanish': { 'a random topic': 'Aleatorio', 'Technology': 'Tecnología', 'History': 'Historia', 'Science': 'Ciencia', 'Self-Help': 'Autoayuda', 'inspirational or motivational topics': 'Inspirador', 'assertiveness': 'Asertividad', 'family': 'Familia', 'relationships': 'Relaciones', 'wellbeing': 'Bienestar' }
         };
 
@@ -694,7 +698,6 @@
         };
 
         const fetchTextFromAI = async (isInitialFetch = false) => {
-            const apiKey = (typeof configApiKey !== 'undefined' && configApiKey) ? configApiKey : "";
             const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
             
             const wordCount = isInitialFetch ? 150 : 250;
@@ -869,7 +872,7 @@
             }
             state.accuracy = state.totalTypedChars > 0 ? Math.round((state.correctTypedChars / state.totalTypedChars) * 100) : 100;
         };
-
+        
         const init = () => {
             loadPreferences();
             updateTimeDisplay();
