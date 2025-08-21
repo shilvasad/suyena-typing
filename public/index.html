@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suyena Typing Test</title>
     <!-- Favicon -->
-    <link rel="icon" href='suyena.svg' type="image/svg+xml">
+    <link rel="icon" href="https://type.suyena.com/suyena.svg" type="image/svg+xml">
     <!-- Google Fonts for a modern look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
     
     <style>
         /* ========================================
@@ -30,6 +30,9 @@
             --background-color-internal: rgba(240, 242, 245, 0.7);
             --correct-color: #16a34a;
             --incorrect-color: #dc2626;
+            --font-primary: 'Poppins', sans-serif;
+            --font-bengali: 'Noto Sans Bengali', sans-serif;
+            --font-hindi: 'Noto Sans Devanagari', sans-serif;
         }
 
         body[data-theme="dark"] {
@@ -76,7 +79,7 @@
 
         body {
             color: var(--text-color);
-            font-family: "Noto Serif", serif;
+            font-family: var(--font-primary);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -195,27 +198,29 @@
 
         /* Options Bar */
         .options {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1rem;
             margin-bottom: 2rem;
+            align-items: end;
         }
 
         .option-group {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            flex-grow: 1;
         }
         
         .option-group label {
             font-size: 0.9rem;
             color: var(--text-secondary-color);
         }
+        
+        .option-group.age-group {
+            grid-column: span 2;
+        }
 
-        select {
+        select, input[type="range"] {
             padding: 0.75rem;
             background-color: var(--background-color-internal);
             border: 1px solid var(--border-color);
@@ -226,7 +231,12 @@
             transition: background-color 0.3s, border-color 0.3s, color 0.3s;
         }
 
-        #startButton {
+        .buttons-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        #startButton, #stopButton {
             padding: 0.75rem 2rem;
             border: none;
             border-radius: 8px;
@@ -235,28 +245,31 @@
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.1s ease, color 0.3s ease;
-            flex-shrink: 0;
-            align-self: flex-end; /* Aligns with the bottom of the input */
+            flex-grow: 1;
         }
         
-        #startButton:hover {
+        #startButton:hover, #stopButton:hover {
             opacity: 0.9;
         }
 
-        #startButton:active {
+        #startButton:active, #stopButton:active {
             transform: scale(0.98);
         }
 
-        #startButton:disabled {
+        #startButton:disabled, #stopButton:disabled {
             background-color: #555;
             color: #888;
             cursor: not-allowed;
+        }
+        
+        #stopButton {
+            background-color: var(--incorrect-color);
         }
 
         /* Stats Display */
         .stats {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 1rem;
             text-align: center;
             margin-bottom: 2rem;
@@ -283,6 +296,13 @@
              transition: color 0.3s ease;
         }
 
+        .stat-sub-value {
+            font-size: 0.75rem;
+            color: var(--text-secondary-color);
+            margin-top: -5px;
+            display: block;
+        }
+
         /* Typing Area */
         #wordsWrapper {
             font-size: 1.8rem;
@@ -301,10 +321,9 @@
             align-content: flex-start; /* Align lines to the top */
         }
         
-        #wordsWrapper span {
+        .word {
             margin-right: 0.6rem; /* Space between words */
             margin-bottom: 0.6rem; /* Space between lines */
-            word-break: break-all; /* Break very long words */
         }
 
         #wordsWrapper .loading-text {
@@ -319,16 +338,16 @@
             100% { opacity: 0.6; }
         }
 
-        #wordsWrapper span.correct {
+        .word.correct {
             color: var(--correct-color);
         }
         
-        #wordsWrapper span.incorrect {
+        .word.incorrect {
             color: var(--incorrect-color);
             text-decoration: underline;
         }
 
-        #wordsWrapper span.current {
+        .word.current {
             background-color: var(--primary-color);
             color: #ffffff;
             border-radius: 6px;
@@ -385,20 +404,17 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            html {
-                font-size: 14px;
+            .options {
+                grid-template-columns: 1fr 1fr;
+            }
+            .option-group.age-group {
+                grid-column: span 2;
             }
             .container {
                 padding: 1.5rem;
             }
-            .options {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            #startButton {
-                width: 100%;
-                margin-top: 0.5rem;
-                align-self: auto;
+            .buttons-container {
+                grid-column: 1 / -1;
             }
             .stats {
                 grid-template-columns: repeat(2, 1fr);
@@ -442,17 +458,53 @@
                     <option value="0">Infinite</option>
                 </select>
             </div>
-            <button id="startButton">Start</button>
+            <div class="option-group">
+                <label for="contentTypeSelect">Content Type</label>
+                <select id="contentTypeSelect">
+                    <option value="general text">General</option>
+                    <option value="an article">Article</option>
+                    <option value="a story">Story</option>
+                </select>
+            </div>
+            <div class="option-group">
+                <label for="subjectSelect">Subject</label>
+                <select id="subjectSelect">
+                    <option value="a random topic">Random</option>
+                    <option value="Technology">Technology</option>
+                    <option value="History">History</option>
+                    <option value="Science">Science</option>
+                    <option value="Self-Help">Self-Help</option>
+                    <option value="inspirational or motivational topics">Inspirational</option>
+                    <option value="assertiveness">Assertive</option>
+                    <option value="family">Family</option>
+                    <option value="relationships">Relationships</option>
+                    <option value="wellbeing">Wellbeing</option>
+                </select>
+            </div>
+            <div class="option-group age-group">
+                <label for="ageRange">Age Level (<span id="ageValue">18</span> years)</label>
+                <input type="range" id="ageRange" min="10" max="80" value="18">
+            </div>
+            <div class="buttons-container">
+                <button id="startButton">Start</button>
+                <button id="stopButton" style="display: none;">Stop</button>
+            </div>
         </section>
 
         <section class="stats">
             <div>
                 <div class="stat"><span id="wpmValue" class="stat-value">0</span></div>
                 <div class="stat-label">WPM</div>
+                <span class="stat-sub-value">(<span id="totalWordsValue">0</span> words)</span>
             </div>
             <div>
                 <div class="stat"><span id="cpmValue" class="stat-value">0</span></div>
                 <div class="stat-label">CPM</div>
+                <span class="stat-sub-value">(<span id="totalCharsValue">0</span> chars)</span>
+            </div>
+             <div>
+                <div class="stat"><span id="pagesValue" class="stat-value">0.00</span></div>
+                <div class="stat-label">Pages</div>
             </div>
             <div>
                 <div class="stat"><span id="accuracyValue" class="stat-value">100</span>%</div>
@@ -474,6 +526,9 @@
             <p id="finalWpm"></p>
             <p id="finalCpm"></p>
             <p id="finalAccuracy"></p>
+            <p id="totalWordsTyped"></p>
+            <p id="totalCharsTyped"></p>
+            <p id="totalPagesTyped"></p>
         </section>
 
     </main>
@@ -481,60 +536,84 @@
     <script src="config.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // DOM Elements
         const languageSelect = document.getElementById('languageSelect');
         const durationSelect = document.getElementById('durationSelect');
+        const contentTypeSelect = document.getElementById('contentTypeSelect');
+        const subjectSelect = document.getElementById('subjectSelect');
+        const ageRange = document.getElementById('ageRange');
+        const ageValue = document.getElementById('ageValue');
         const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
         const wpmValue = document.getElementById('wpmValue');
         const cpmValue = document.getElementById('cpmValue');
         const accuracyValue = document.getElementById('accuracyValue');
         const timeValue = document.getElementById('timeValue');
+        const pagesValue = document.getElementById('pagesValue');
+        const totalWordsValue = document.getElementById('totalWordsValue');
+        const totalCharsValue = document.getElementById('totalCharsValue');
         const wordsWrapper = document.getElementById('wordsWrapper');
         const userInput = document.getElementById('userInput');
         const resultsSection = document.getElementById('results');
         const finalWpm = document.getElementById('finalWpm');
         const finalCpm = document.getElementById('finalCpm');
         const finalAccuracy = document.getElementById('finalAccuracy');
+        const totalWordsTyped = document.getElementById('totalWordsTyped');
+        const totalCharsTyped = document.getElementById('totalCharsTyped');
+        const totalPagesTyped = document.getElementById('totalPagesTyped');
         const themeSwitcher = document.getElementById('themeSwitcher');
         const body = document.body;
 
+        // State
         let state = {
-            language: 'English',
-            duration: 60,
-            words: [],
-            currentWordIndex: 0,
-            timeRemaining: 60,
-            wpm: 0,
-            cpm: 0,
-            accuracy: 100,
-            gameState: 'waiting', // 'waiting', 'running', 'finished'
-            timerInterval: null,
-            startTime: 0,
-            totalTypedChars: 0,
-            correctTypedChars: 0,
-            correctTypedWords: 0,
-            isFetchingNextBatch: false, // Flag to prevent multiple fetches
+            language: 'English', duration: 60, contentType: 'general text', subject: 'a random topic', age: 18,
+            words: [], currentWordIndex: 0, timeRemaining: 60, wpm: 0, cpm: 0, accuracy: 100, pages: 0,
+            gameState: 'waiting', timerInterval: null, startTime: 0, totalTypedChars: 0, correctTypedChars: 0,
+            correctTypedWords: 0, isFetchingNextBatch: false,
         };
         
         const themes = ['amethyst', 'dark', 'sunset', 'ocean'];
         let currentThemeIndex = 0;
         let loadingInterval = null;
 
-        const init = () => {
+        const subjectTranslations = {
+            'English': { 'a random topic': 'Random', 'Technology': 'Technology', 'History': 'History', 'Science': 'Science', 'Self-Help': 'Self-Help', 'inspirational or motivational topics': 'Inspirational', 'assertiveness': 'Assertive', 'family': 'Family', 'relationships': 'Relationships', 'wellbeing': 'Wellbeing' },
+            'Bengali': { 'a random topic': 'এলোমেলো', 'Technology': 'প্রযুক্তি', 'History': 'ইতিহাস', 'Science': 'বিজ্ঞান', 'Self-Help': 'আত্ম-সহায়তা', 'inspirational or motivational topics': 'অনুপ্রেরণামূলক', 'assertiveness': 'দৃঢ়তা', 'family': 'পরিবার', 'relationships': 'সম্পর্ক', 'wellbeing': 'সুস্থতা' },
+            'Hindi': { 'a random topic': 'यादृच्छिक', 'Technology': 'प्रौद्योगिकी', 'History': 'इतिहास', 'Science': 'विज्ञान', 'Self-Help': 'स्व-सहायता', 'inspirational or motivational topics': 'प्रेरणादायक', 'assertiveness': 'दृढ़ता', 'family': 'परिवार', 'relationships': 'रिश्ते', 'wellbeing': 'कल्याण' },
+            'Spanish': { 'a random topic': 'Aleatorio', 'Technology': 'Tecnología', 'History': 'Historia', 'Science': 'Ciencia', 'Self-Help': 'Autoayuda', 'inspirational or motivational topics': 'Inspirador', 'assertiveness': 'Asertividad', 'family': 'Familia', 'relationships': 'Relaciones', 'wellbeing': 'Bienestar' }
+        };
+
+        const updateSubjectTranslations = () => {
+            const currentTranslations = subjectTranslations[state.language];
+            const options = subjectSelect.options;
+            for (let i = 0; i < options.length; i++) {
+                const value = options[i].value;
+                if (currentTranslations[value]) {
+                    options[i].textContent = currentTranslations[value];
+                }
+            }
+        };
+
+        const savePreferences = () => {
+            const prefs = {
+                language: state.language, duration: state.duration, contentType: state.contentType,
+                subject: state.subject, age: state.age,
+            };
+            localStorage.setItem('typingTestPrefs', JSON.stringify(prefs));
+        };
+
+        const loadPreferences = () => {
+            const savedPrefs = localStorage.getItem('typingTestPrefs');
+            if (savedPrefs) {
+                const prefs = JSON.parse(savedPrefs);
+                Object.assign(state, prefs);
+            }
             languageSelect.value = state.language;
             durationSelect.value = state.duration;
-            updateTimeDisplay();
-            
-            userInput.addEventListener('keydown', handleKeyPress);
-            startButton.addEventListener('click', () => state.gameState === 'running' ? resetGame() : startGame());
-            languageSelect.addEventListener('change', (e) => state.language = e.target.value);
-            durationSelect.addEventListener('change', (e) => {
-                state.duration = parseInt(e.target.value, 10);
-                state.timeRemaining = state.duration;
-                updateTimeDisplay();
-            });
-            
-            themeSwitcher.addEventListener('click', switchTheme);
-            loadTheme();
+            contentTypeSelect.value = state.contentType;
+            subjectSelect.value = state.subject;
+            ageRange.value = state.age;
+            ageValue.textContent = state.age;
         };
 
         const switchTheme = () => {
@@ -558,7 +637,6 @@
             userInput.disabled = false;
             userInput.focus();
             
-            // Start loading animation
             const loadingMessages = ['Generating text.', 'Generating text..', 'Generating text...'];
             let messageIndex = 0;
             wordsWrapper.innerHTML = `<span class="loading-text">${loadingMessages[0]}</span>`;
@@ -568,7 +646,7 @@
             }, 600);
 
             try {
-                const text = await fetchTextFromAI(true); // Always fetch a small initial chunk
+                const text = await fetchTextFromAI(true);
                 clearInterval(loadingInterval);
                 state.words = text.trim().split(' ');
                 renderWords();
@@ -581,12 +659,16 @@
         };
 
         const endGame = () => {
+            if (state.gameState !== 'running') return;
             clearInterval(state.timerInterval);
             state.gameState = 'finished';
             calculateStats();
             finalWpm.textContent = `WPM: ${state.wpm}`;
             finalCpm.textContent = `CPM: ${state.cpm}`;
             finalAccuracy.textContent = `Accuracy: ${state.accuracy}%`;
+            totalWordsTyped.textContent = `Total Words: ${state.correctTypedWords}`;
+            totalCharsTyped.textContent = `Total Characters: ${state.correctTypedChars}`;
+            totalPagesTyped.textContent = `Pages Typed: ${state.pages.toFixed(2)}`;
             resultsSection.classList.remove('hidden');
             userInput.disabled = true;
             updateUIForState();
@@ -596,17 +678,9 @@
             clearInterval(state.timerInterval);
             clearInterval(loadingInterval);
             Object.assign(state, {
-                gameState: 'waiting',
-                startTime: 0,
-                wpm: 0,
-                cpm: 0,
-                accuracy: 100,
-                totalTypedChars: 0,
-                correctTypedChars: 0,
-                correctTypedWords: 0,
-                currentWordIndex: 0,
-                words: [],
-                isFetchingNextBatch: false,
+                gameState: 'waiting', startTime: 0, wpm: 0, cpm: 0, accuracy: 100, pages: 0,
+                totalTypedChars: 0, correctTypedChars: 0, correctTypedWords: 0,
+                currentWordIndex: 0, words: [], isFetchingNextBatch: false,
             });
             state.duration = parseInt(durationSelect.value, 10);
             state.timeRemaining = state.duration;
@@ -620,17 +694,12 @@
         };
 
         const fetchTextFromAI = async (isInitialFetch = false) => {
-            // The 'apiKey' variable is now expected to be available globally from config.js
-            if (typeof apiKey === 'undefined') {
-                throw new Error("API key is not defined. Please create a config.js file.");
-            }
+            const apiKey = (typeof configApiKey !== 'undefined' && configApiKey) ? configApiKey : "";
             const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
             
-            // If it's the first fetch, always get a small chunk for a quick start.
-            // Otherwise, get a larger chunk for subsequent appends.
             const wordCount = isInitialFetch ? 150 : 250;
 
-            const promptDetail = `a text of about ${wordCount} words suitable for a typing test. Do not include any formatting, titles, or introduction.`;
+            const promptDetail = `a text of about ${wordCount} words for ${state.contentType} about ${state.subject}, suitable for a ${state.age}-year-old to read, for a typing test. Do not include any formatting, titles, or introduction.`;
             const prompt = `Generate ${promptDetail} in the ${state.language} language.`;
             const requestBody = {
                 contents: [{ parts: [{ text: prompt }] }],
@@ -653,7 +722,7 @@
         const fetchAndAppendText = async () => {
             state.isFetchingNextBatch = true;
             try {
-                const text = await fetchTextFromAI(false); // Fetch a larger, subsequent chunk
+                const text = await fetchTextFromAI(false);
                 const newWords = text.trim().split(' ');
                 state.words.push(...newWords);
                 appendWordsToDOM(newWords);
@@ -667,6 +736,7 @@
         const appendWordsToDOM = (newWords) => {
             newWords.forEach(word => {
                 const wordSpan = document.createElement('span');
+                wordSpan.className = 'word';
                 wordSpan.textContent = word;
                 wordsWrapper.appendChild(wordSpan);
             });
@@ -674,9 +744,10 @@
 
         const renderWords = () => {
             wordsWrapper.innerHTML = '';
-            wordsWrapper.style.fontFamily = state.language === 'Bengali' ? 'var(--font-bengali)' : 'var(--font-primary)';
+            wordsWrapper.style.fontFamily = state.language === 'Bengali' ? 'var(--font-bengali)' : (state.language === 'Hindi' ? 'var(--font-hindi)' : 'var(--font-primary)');
             state.words.forEach(word => {
                 const wordSpan = document.createElement('span');
+                wordSpan.className = 'word';
                 wordSpan.textContent = word;
                 wordsWrapper.appendChild(wordSpan);
             });
@@ -686,15 +757,32 @@
         };
 
         const updateUIForState = () => {
-            startButton.textContent = state.gameState === 'running' ? 'Restart' : 'Start';
-            languageSelect.disabled = state.gameState === 'running';
-            durationSelect.disabled = state.gameState === 'running';
+            if (state.gameState === 'running') {
+                startButton.textContent = 'Restart';
+                stopButton.style.display = 'block';
+                languageSelect.disabled = true;
+                durationSelect.disabled = true;
+                contentTypeSelect.disabled = true;
+                subjectSelect.disabled = true;
+                ageRange.disabled = true;
+            } else {
+                startButton.textContent = 'Start';
+                stopButton.style.display = 'none';
+                languageSelect.disabled = false;
+                durationSelect.disabled = false;
+                contentTypeSelect.disabled = false;
+                subjectSelect.disabled = false;
+                ageRange.disabled = false;
+            }
         };
         
         const updateStatsDisplay = () => {
             wpmValue.textContent = state.wpm;
             cpmValue.textContent = state.cpm;
             accuracyValue.textContent = state.accuracy;
+            pagesValue.textContent = state.pages.toFixed(2);
+            totalWordsValue.textContent = state.correctTypedWords;
+            totalCharsValue.textContent = state.correctTypedChars;
         };
 
         const updateTimeDisplay = () => {
@@ -732,10 +820,10 @@
         };
 
         const validateWord = () => {
-            const typedWord = userInput.value.trim();
+            const typedWord = userInput.value.trim().normalize('NFC');
             if (typedWord === '') return;
 
-            const currentWord = state.words[state.currentWordIndex];
+            const currentWord = state.words[state.currentWordIndex].normalize('NFC');
             const wordSpan = wordsWrapper.children[state.currentWordIndex];
             
             wordSpan.classList.remove('current');
@@ -751,7 +839,6 @@
 
             state.currentWordIndex++;
 
-            // For any test longer than 3 minutes, fetch more text
             const isLongTest = state.duration === 0 || state.duration > 180;
             const wordsRemaining = state.words.length - state.currentWordIndex;
             
@@ -760,7 +847,6 @@
             }
 
             if (state.currentWordIndex >= state.words.length) {
-                // Only end if it's not a long/infinite test that's still fetching
                 if (!isLongTest) endGame(); 
                 return;
             }
@@ -777,12 +863,42 @@
             const timeElapsedInSeconds = (Date.now() - state.startTime) / 1000;
             if (timeElapsedInSeconds > 0) {
                 const timeElapsedInMinutes = timeElapsedInSeconds / 60;
-                // New WPM calculation based on actual correct words
                 state.wpm = Math.round(state.correctTypedWords / timeElapsedInMinutes) || 0;
-                // CPM is based on correct characters per minute
                 state.cpm = Math.round(state.correctTypedChars / timeElapsedInMinutes) || 0;
+                state.pages = state.correctTypedWords / 250;
             }
             state.accuracy = state.totalTypedChars > 0 ? Math.round((state.correctTypedChars / state.totalTypedChars) * 100) : 100;
+        };
+
+        const init = () => {
+            loadPreferences();
+            updateTimeDisplay();
+            updateSubjectTranslations();
+            
+            userInput.addEventListener('keydown', handleKeyPress);
+            startButton.addEventListener('click', () => state.gameState === 'running' ? resetGame() : startGame());
+            stopButton.addEventListener('click', endGame);
+            languageSelect.addEventListener('change', (e) => {
+                state.language = e.target.value;
+                updateSubjectTranslations();
+                savePreferences();
+            });
+            durationSelect.addEventListener('change', (e) => {
+                state.duration = parseInt(e.target.value, 10);
+                state.timeRemaining = state.duration;
+                updateTimeDisplay();
+                savePreferences();
+            });
+            contentTypeSelect.addEventListener('change', (e) => { state.contentType = e.target.value; savePreferences(); });
+            subjectSelect.addEventListener('change', (e) => { state.subject = e.target.value; savePreferences(); });
+            ageRange.addEventListener('input', (e) => {
+                state.age = e.target.value;
+                ageValue.textContent = state.age;
+                savePreferences();
+            });
+            
+            themeSwitcher.addEventListener('click', switchTheme);
+            loadTheme();
         };
 
         init();
