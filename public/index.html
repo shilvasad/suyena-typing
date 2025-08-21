@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suyena Typing Test</title>
+    <!-- Favicon -->
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M62.5,25C55,25 50,31.5 50,37.5C50,43.5 55,50 62.5,50H75V25H62.5z" fill="%237c3aed" /><path d="M37.5,75C45,75 50,68.5 50,62.5C50,56.5 45,50 37.5,50H25V75H37.5z" fill="%237c3aed" /><rect x="25" y="25" width="25" height="25" fill="%23eebbc3" /><rect x="50" y="50" width="25" height="25" fill="%23eebbc3" /></svg>'>
     <!-- Google Fonts for a modern look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -476,6 +478,7 @@
 
     </main>
     
+    <script src="config.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const languageSelect = document.getElementById('languageSelect');
@@ -617,7 +620,10 @@
         };
 
         const fetchTextFromAI = async (isInitialFetch = false) => {
-            const apiKey = "AIzaSyDMeorM8ab5DYNXHHlD3k9e0VTkTWeOXWA";
+            // The 'apiKey' variable is now expected to be available globally from config.js
+            if (typeof apiKey === 'undefined') {
+                throw new Error("API key is not defined. Please create a config.js file.");
+            }
             const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
             
             // If it's the first fetch, always get a small chunk for a quick start.
