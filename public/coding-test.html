@@ -593,7 +593,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- CONFIGURATION ---
-            const API_KEY = ""; // Leave blank to use environment-provided key
+            const apiKey = "AIzaSyDMeorM8ab5DYNXHHlD3k9e0VTkTWeOXWA"; 
 
             // --- DOM ELEMENTS ---
             const elements = {
@@ -725,7 +725,7 @@
                 const difficulty = elements.difficultySelect.value;
                 const prompt = `Generate a ${difficulty}-level code snippet in ${language}. The code should be around ${isInitialFetch ? '10-15' : '8-12'} lines long. ${isInitialFetch ? 'Start the snippet with a single-line comment explaining its purpose.' : ''} Provide only the raw code without any other explanation or markdown formatting.`;
                 
-                const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${API_KEY}`;
+                const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
                 
                 const response = await fetch(API_URL, {
                     method: 'POST',
