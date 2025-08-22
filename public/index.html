@@ -69,6 +69,28 @@
             --background-color-internal: rgba(30, 50, 70, 0.7);
             --text-on-primary: #0b192f;
         }
+        
+        body[data-theme="forest"] {
+            --surface-color: rgba(25, 35, 30, 0.6);
+            --primary-color: #4ade80;
+            --primary-color-rgb: 74, 222, 128;
+            --text-color: #dcfce7;
+            --text-secondary-color: #a7f3d0;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --background-color-internal: rgba(22, 44, 33, 0.7);
+            --text-on-primary: #052e16;
+        }
+
+        body[data-theme="rose"] {
+            --surface-color: rgba(50, 20, 30, 0.6);
+            --primary-color: #f472b6;
+            --primary-color-rgb: 244, 114, 182;
+            --text-color: #fce7f3;
+            --text-secondary-color: #fbcfe8;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --background-color-internal: rgba(70, 30, 40, 0.7);
+            --text-on-primary: #500724;
+        }
 
 
         /* Basic Resets */
@@ -87,7 +109,7 @@
             font-family: var(--font-primary);
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             min-height: 100vh;
             padding: 2rem 1rem;
@@ -145,6 +167,52 @@
                 radial-gradient(at 50% 50%, hsla(160, 50%, 50%, 0.2) 0px, transparent 50%);
             background-color: #0b192f;
         }
+        body[data-theme="forest"]::before {
+            background-image:
+                radial-gradient(at 10% 15%, hsla(140, 60%, 80%, 0.3) 0px, transparent 50%),
+                radial-gradient(at 85% 90%, hsla(100, 50%, 70%, 0.25) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(120, 40%, 60%, 0.2) 0px, transparent 50%);
+            background-color: #141E1A;
+        }
+        body[data-theme="rose"]::before {
+            background-image:
+                radial-gradient(at 15% 20%, hsla(330, 80%, 85%, 0.4) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, hsla(0, 70%, 80%, 0.35) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(340, 60%, 80%, 0.2) 0px, transparent 50%);
+            background-color: #2E1B25;
+        }
+
+        /* Navigation Menu */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            padding: 0.5rem;
+            background-color: var(--surface-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .nav-link {
+            padding: 0.5rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-link.active {
+            background-color: var(--primary-color);
+            color: var(--text-on-primary);
+        }
+
+        .nav-link:not(.active):hover {
+            background-color: var(--background-color-internal);
+        }
 
 
         /* Main Container - Glassmorphism */
@@ -164,11 +232,9 @@
 
         /* Theme Switcher Icon */
         #themeSwitcher {
-            position: sticky;
+            position: absolute;
             top: 1.5rem;
-            float: right;
-            margin-bottom: -40px; /* Adjust to not interfere with header content */
-            z-index: 10;
+            right: 1.5rem;
             background: none;
             border: none;
             cursor: pointer;
@@ -483,6 +549,11 @@
 </head>
 <body data-theme="amethyst">
 
+    <nav class="main-nav">
+        <a href="./index.html" class="nav-link active">General Test</a>
+        <a href="./coding-test.html" class="nav-link">Coding Test</a>
+    </nav>
+
     <main class="container">
         <button id="themeSwitcher" title="Change Theme">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"></circle><path d="M16.2 7.8a6 6 0 0 0-8.4 0"></path><path d="M7.8 16.2a6 6 0 0 0 8.4 0"></path><path d="M12 2a10 10 0 1 0 10 10"></path></svg>
@@ -640,14 +711,14 @@
             correctTypedWords: 0, isFetchingNextBatch: false,
         };
         
-        const themes = ['amethyst', 'dark', 'sunset', 'ocean'];
+        const themes = ['amethyst', 'dark', 'sunset', 'ocean', 'forest', 'rose'];
         let currentThemeIndex = 0;
         let loadingInterval = null;
 
         const subjectTranslations = {
             'English': { 'a random topic': 'Random', 'Technology': 'Technology', 'History': 'History', 'Science': 'Science', 'Self-Help': 'Self-Help', 'inspirational or motivational topics': 'Inspirational', 'assertiveness': 'Assertive', 'family': 'Family', 'relationships': 'Relationships', 'wellbeing': 'Wellbeing' },
             'Bengali': { 'a random topic': 'এলোমেলো', 'Technology': 'প্রযুক্তি', 'History': 'ইতিহাস', 'Science': 'বিজ্ঞান', 'Self-Help': 'আত্ম-সহায়তা', 'inspirational or motivational topics': 'অনুপ্রেরণামূলক', 'assertiveness': 'দৃঢ়তা', 'family': 'পরিবার', 'relationships': 'সম্পর্ক', 'wellbeing': 'সুস্থতা' },
-            'Hindi': { 'a random topic': 'यादृच्छिक', 'Technology': 'प्रौद्योगिकी', 'History': 'इतिहास', 'Science': 'विज्ञान', 'Self-Help': 'स्व-सहायता', 'inspirational or motivational topics': 'प्रेरणादायक', 'assertiveness': 'दृढ़ता', 'family': 'परिवार', 'relationships': 'रिश्ते', 'wellbeing': 'कल्याण' },
+            'Hindi': { 'a random topic': 'यादृच्छिक', 'Technology': 'प्रौद्योगिकी', 'History': 'इतिहास', 'Science': 'विज्ञान', 'Self-Help': 'स्व-सहायता', 'inspirational or motivational topics': 'प्रेरणादायक', 'assertiveness': 'दृढ़ता', 'family': 'परिवार', 'relationships': 'रिश्ते', 'wellbeing': 'কल्याण' },
             'Spanish': { 'a random topic': 'Aleatorio', 'Technology': 'Tecnología', 'History': 'Historia', 'Science': 'Ciencia', 'Self-Help': 'Autoayuda', 'inspirational or motivational topics': 'Inspirador', 'assertiveness': 'Asertividad', 'family': 'Familia', 'relationships': 'Relaciones', 'wellbeing': 'Bienestar' }
         };
 
@@ -685,7 +756,11 @@
         };
 
         const switchTheme = () => {
-            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            let newThemeIndex = currentThemeIndex;
+            while (newThemeIndex === currentThemeIndex) {
+                newThemeIndex = Math.floor(Math.random() * themes.length);
+            }
+            currentThemeIndex = newThemeIndex;
             const newTheme = themes[currentThemeIndex];
             body.dataset.theme = newTheme;
             localStorage.setItem('typingTestTheme', newTheme);
