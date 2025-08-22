@@ -328,6 +328,7 @@
         .word {
             margin-right: 0.6rem; /* Space between words */
             margin-bottom: 0.6rem; /* Space between lines */
+            display: inline-flex;
         }
 
         #wordsWrapper .loading-text {
@@ -342,13 +343,12 @@
             100% { opacity: 0.6; }
         }
 
-        .word.correct {
+        .word .char.correct {
             color: var(--correct-color);
         }
         
-        .word.incorrect {
+        .word .char.incorrect {
             color: var(--incorrect-color);
-            text-decoration: underline;
         }
 
         .word.current {
@@ -627,7 +627,7 @@
         const subjectTranslations = {
             'English': { 'a random topic': 'Random', 'Technology': 'Technology', 'History': 'History', 'Science': 'Science', 'Self-Help': 'Self-Help', 'inspirational or motivational topics': 'Inspirational', 'assertiveness': 'Assertive', 'family': 'Family', 'relationships': 'Relationships', 'wellbeing': 'Wellbeing' },
             'Bengali': { 'a random topic': 'এলোমেলো', 'Technology': 'প্রযুক্তি', 'History': 'ইতিহাস', 'Science': 'বিজ্ঞান', 'Self-Help': 'আত্ম-সহায়তা', 'inspirational or motivational topics': 'অনুপ্রেরণামূলক', 'assertiveness': 'দৃঢ়তা', 'family': 'পরিবার', 'relationships': 'সম্পর্ক', 'wellbeing': 'সুস্থতা' },
-            'Hindi': { 'a random topic': 'यादृच्छिक', 'Technology': 'प्रौद्योगिकी', 'History': 'इतिहास', 'Science': 'विज्ञान', 'Self-Help': 'स्व-सहायता', 'inspirational or motivational topics': 'प्रेरणादायक', 'assertiveness': 'दृढ़ता', 'family': 'परिवार', 'relationships': 'रिश्ते', 'wellbeing': 'কल्याण' },
+            'Hindi': { 'a random topic': 'यादृच्छিক', 'Technology': 'प्रौद्योगिकी', 'History': 'इतिहास', 'Science': 'विज्ञान', 'Self-Help': 'स्व-सहायता', 'inspirational or motivational topics': 'प्रेरणादायक', 'assertiveness': 'दृढ़ता', 'family': 'परिवार', 'relationships': 'रिश्ते', 'wellbeing': 'कल्याण' },
             'Spanish': { 'a random topic': 'Aleatorio', 'Technology': 'Tecnología', 'History': 'Historia', 'Science': 'Ciencia', 'Self-Help': 'Autoayuda', 'inspirational or motivational topics': 'Inspirador', 'assertiveness': 'Asertividad', 'family': 'Familia', 'relationships': 'Relaciones', 'wellbeing': 'Bienestar' }
         };
 
