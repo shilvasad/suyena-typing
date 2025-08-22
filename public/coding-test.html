@@ -2,117 +2,131 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suyena Coding Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Suyena Typing Test</title>
+    <!-- Favicon -->
     <link rel="icon" href="https://type.suyena.com/suyena.svg" type="image/svg+xml">
+    <!-- Google Fonts for a modern look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code:wght@400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
     <style>
         /* ========================================
-         * Custom Stylesheet for the Application
-         * UI updated with animated mesh gradient backgrounds.
-         * ======================================== */
+        PHASE 3.1: APPLICATION STYLES
+        ========================================
+        This section contains all the CSS for the application.
+        The design is clean, modern, and fully responsive.
+        A dark theme is used for better visual comfort.
+        */
 
-        /* --- THEME & FONT DEFINITIONS --- */
-        :root { /* Default Theme: Ocean */
-            --bg-color: #0b192f;
-            --surface-color: #162b46;
-            --primary-color: #22d3ee;
-            --primary-color-rgb: 34, 211, 238;
-            --text-color: #e0f2fe;
-            --text-secondary-color: #a8d5e5;
-            --border-color: #30363d;
-            --correct-color: #3fb950;
-            --incorrect-color: #f85149;
-            --text-on-primary: #0b192f;
-            --font-body: 'Inter', sans-serif;
-            --font-code: 'Fira Code', monospace;
-            --font-cursive: 'Dancing Script', cursive;
-        }
-
-        body[data-theme="amethyst"] {
-            --bg-color: #f0f2f5;
+        :root { /* Default Amethyst Theme */
             --surface-color: rgba(255, 255, 255, 0.6);
             --primary-color: #7c3aed;
             --primary-color-rgb: 124, 58, 237;
             --text-color: #1c1e21;
             --text-secondary-color: #606770;
             --border-color: rgba(0, 0, 0, 0.1);
+            --background-color-internal: rgba(240, 242, 245, 0.7);
+            --correct-color: #16a34a;
+            --incorrect-color: #dc2626;
+            --font-primary: 'Poppins', sans-serif;
+            --font-bengali: 'Noto Sans Bengali', sans-serif;
+            --font-hindi: 'Noto Sans Devanagari', sans-serif;
+            --font-cursive: 'Dancing Script', cursive;
             --text-on-primary: #ffffff;
         }
 
         body[data-theme="dark"] {
-            --bg-color: #121212;
             --surface-color: rgba(30, 30, 30, 0.6);
             --primary-color: #03dac6;
             --primary-color-rgb: 3, 218, 198;
             --text-color: #e0e0e0;
             --text-secondary-color: #a0a0a0;
             --border-color: rgba(255, 255, 255, 0.1);
+            --background-color-internal: rgba(18, 18, 18, 0.7);
             --text-on-primary: #121212;
         }
 
         body[data-theme="sunset"] {
-            --bg-color: #1a0b2e;
             --surface-color: rgba(40, 25, 50, 0.6);
             --primary-color: #ff8c42;
             --primary-color-rgb: 255, 140, 66;
             --text-color: #f0e6ff;
             --text-secondary-color: #d8c4e8;
             --border-color: rgba(255, 255, 255, 0.1);
+            --background-color-internal: rgba(60, 40, 70, 0.7);
             --text-on-primary: #1a0b2e;
+        }
+
+        body[data-theme="ocean"] {
+            --surface-color: rgba(20, 30, 40, 0.6);
+            --primary-color: #22d3ee;
+            --primary-color-rgb: 34, 211, 238;
+            --text-color: #e0f2fe;
+            --text-secondary-color: #a8d5e5;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --background-color-internal: rgba(30, 50, 70, 0.7);
+            --text-on-primary: #0b192f;
         }
         
         body[data-theme="forest"] {
-            --bg-color: #141E1A;
             --surface-color: rgba(25, 35, 30, 0.6);
             --primary-color: #4ade80;
             --primary-color-rgb: 74, 222, 128;
             --text-color: #dcfce7;
             --text-secondary-color: #a7f3d0;
             --border-color: rgba(255, 255, 255, 0.1);
+            --background-color-internal: rgba(22, 44, 33, 0.7);
             --text-on-primary: #052e16;
         }
 
         body[data-theme="rose"] {
-            --bg-color: #2E1B25;
             --surface-color: rgba(50, 20, 30, 0.6);
             --primary-color: #f472b6;
             --primary-color-rgb: 244, 114, 182;
             --text-color: #fce7f3;
             --text-secondary-color: #fbcfe8;
             --border-color: rgba(255, 255, 255, 0.1);
+            --background-color-internal: rgba(70, 30, 40, 0.7);
             --text-on-primary: #500724;
         }
 
 
-        /* --- GENERAL & LAYOUT STYLES --- */
+        /* Basic Resets */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        html {
+            font-size: 16px;
+        }
+
         body {
-            background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: var(--font-body);
-            min-height: 100vh;
+            font-family: var(--font-primary);
             display: flex;
             flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            transition: background-color 0.5s ease, color 0.5s ease;
-            overflow: hidden; /* Hide scrollbars from gradient overflow */
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+            background-attachment: fixed;
+            transition: color 0.3s ease;
+            overflow-y: auto; /* Allow vertical scrolling */
         }
         
+        /* Animated Gradient Background */
         body::before {
             content: '';
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
             background-size: 200% 200%;
             animation: gradient-animation 20s ease infinite;
@@ -125,86 +139,98 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* --- MESH GRADIENT DEFINITIONS --- */
-        body[data-theme="ocean"]::before { background-image: radial-gradient(at 80% 20%, hsla(187, 82%, 66%, 0.3) 0px, transparent 50%), radial-gradient(at 20% 90%, hsla(220, 70%, 60%, 0.25) 0px, transparent 50%), radial-gradient(at 50% 50%, hsla(160, 50%, 50%, 0.2) 0px, transparent 50%); background-color: var(--bg-color); }
-        body[data-theme="amethyst"]::before { background-image: radial-gradient(at 80% 20%, hsla(300, 80%, 90%, 0.9) 0px, transparent 50%), radial-gradient(at 20% 90%, hsla(240, 90%, 85%, 0.8) 0px, transparent 50%), radial-gradient(at 0% 0%, hsla(160, 70%, 90%, 0.7) 0px, transparent 50%); background-color: var(--bg-color); }
-        body[data-theme="dark"]::before { background-image: radial-gradient(at 80% 20%, hsla(174, 95%, 40%, 0.3) 0px, transparent 50%), radial-gradient(at 20% 90%, hsla(300, 45%, 35%, 0.25) 0px, transparent 50%), radial-gradient(at 50% 50%, hsla(220, 35%, 25%, 0.2) 0px, transparent 50%); background-color: var(--bg-color); }
-        body[data-theme="sunset"]::before { background-image: radial-gradient(at 10% 10%, hsla(25, 100%, 63%, 0.4) 0px, transparent 50%), radial-gradient(at 80% 90%, hsla(340, 80%, 70%, 0.35) 0px, transparent 50%), radial-gradient(at 50% 50%, hsla(280, 50%, 60%, 0.2) 0px, transparent 50%); background-color: var(--bg-color); }
-        body[data-theme="forest"]::before { background-image: radial-gradient(at 10% 15%, hsla(140, 60%, 80%, 0.3) 0px, transparent 50%), radial-gradient(at 85% 90%, hsla(100, 50%, 70%, 0.25) 0px, transparent 50%), radial-gradient(at 50% 50%, hsla(120, 40%, 60%, 0.2) 0px, transparent 50%); background-color: var(--bg-color); }
-        body[data-theme="rose"]::before { background-image: radial-gradient(at 15% 20%, hsla(330, 80%, 85%, 0.4) 0px, transparent 50%), radial-gradient(at 90% 80%, hsla(0, 70%, 80%, 0.35) 0px, transparent 50%), radial-gradient(at 50% 50%, hsla(340, 60%, 80%, 0.2) 0px, transparent 50%); background-color: var(--bg-color); }
-
-
-        .main-container {
-            width: 100%;
-            max-width: 56rem; /* 896px */
-            margin: 0 auto;
-            position: relative;
+        body[data-theme="amethyst"]::before {
+            background-image:
+                radial-gradient(at 80% 20%, hsla(300, 80%, 90%, 0.9) 0px, transparent 50%),
+                radial-gradient(at 20% 90%, hsla(240, 90%, 85%, 0.8) 0px, transparent 50%),
+                radial-gradient(at 0% 0%, hsla(160, 70%, 90%, 0.7) 0px, transparent 50%);
+            background-color: #f0f2f5;
+        }
+        body[data-theme="dark"]::before {
+            background-image: 
+                radial-gradient(at 80% 20%, hsla(174, 95%, 40%, 0.3) 0px, transparent 50%),
+                radial-gradient(at 20% 90%, hsla(300, 45%, 35%, 0.25) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(220, 35%, 25%, 0.2) 0px, transparent 50%);
+            background-color: #121212;
+        }
+        body[data-theme="sunset"]::before {
+            background-image:
+                radial-gradient(at 10% 10%, hsla(25, 100%, 63%, 0.4) 0px, transparent 50%),
+                radial-gradient(at 80% 90%, hsla(340, 80%, 70%, 0.35) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(280, 50%, 60%, 0.2) 0px, transparent 50%);
+            background-color: #1a0b2e;
+        }
+        body[data-theme="ocean"]::before {
+            background-image:
+                radial-gradient(at 80% 20%, hsla(187, 82%, 66%, 0.4) 0px, transparent 50%),
+                radial-gradient(at 20% 90%, hsla(220, 70%, 60%, 0.35) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(160, 50%, 50%, 0.2) 0px, transparent 50%);
+            background-color: #0b192f;
+        }
+        body[data-theme="forest"]::before {
+            background-image:
+                radial-gradient(at 10% 15%, hsla(140, 60%, 80%, 0.3) 0px, transparent 50%),
+                radial-gradient(at 85% 90%, hsla(100, 50%, 70%, 0.25) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(120, 40%, 60%, 0.2) 0px, transparent 50%);
+            background-color: #141E1A;
+        }
+        body[data-theme="rose"]::before {
+            background-image:
+                radial-gradient(at 15% 20%, hsla(330, 80%, 85%, 0.4) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, hsla(0, 70%, 80%, 0.35) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(340, 60%, 80%, 0.2) 0px, transparent 50%);
+            background-color: #2E1B25;
         }
 
-        .main-panel {
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 1rem; /* 16px */
-        }
-
-        /* --- NAVIGATION --- */
+        /* Navigation Menu */
         .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
             margin-bottom: 2rem;
-            display: inline-flex;
-            left: 50%;
-            position: relative;
-            transform: translateX(-50%);
-            z-index: 20;
-            border-radius: 0.5rem;
-            padding: 0.25rem;
-            gap: 0.25rem;
+            padding: 0.5rem;
             background-color: var(--surface-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 12px;
             border: 1px solid var(--border-color);
         }
-        .nav-btn {
-            font-size: 0.875rem;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
+
+        .nav-link {
+            padding: 0.5rem 1.5rem;
             text-decoration: none;
-            transition: background-color 0.2s, color 0.2s;
-            border: 1px solid transparent;
+            color: var(--text-color);
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
         }
-        .nav-btn.active {
+
+        .nav-link.active {
             background-color: var(--primary-color);
             color: var(--text-on-primary);
-            font-weight: 600;
-        }
-        .nav-btn:not(.active) {
-            color: var(--text-secondary-color);
-            border-color: var(--border-color);
-        }
-        .nav-btn:not(.active):hover {
-            background-color: rgba(255, 255, 255, 0.05);
         }
 
-        /* --- HEADER --- */
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .header h1 {
-            font-size: 2.25rem; /* 36px */
-            font-weight: 700;
-            color: var(--primary-color);
-            text-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.3);
-        }
-        .header p {
-            font-size: 1.125rem; /* 18px */
-            margin-top: 0.5rem;
-            color: var(--text-secondary-color);
+        .nav-link:not(.active):hover {
+            background-color: var(--background-color-internal);
         }
 
-        /* --- MAIN CONTENT & OPTIONS --- */
-        .content-wrapper {
+
+        /* Main Container - Glassmorphism */
+        .container {
+            width: 100%;
+            max-width: 900px;
             padding: 2.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            background-color: var(--surface-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
             position: relative;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
+
+        /* Theme Switcher Icon */
         #themeSwitcher {
             position: absolute;
             top: 1.5rem;
@@ -217,235 +243,258 @@
             border-radius: 50%;
             transition: background-color 0.3s, color 0.3s;
         }
+
         #themeSwitcher:hover {
+            background-color: var(--border-color);
             color: var(--primary-color);
         }
-        #options-bar {
+
+        #themeSwitcher svg {
+            display: block;
+        }
+
+        /* Header */
+        .header h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.3);
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        .header p {
+            text-align: center;
+            color: var(--text-secondary-color);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        /* Options Bar */
+        .options {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             align-items: end;
         }
+
         .option-group {
             display: flex;
             flex-direction: column;
+            gap: 0.5rem;
         }
+        
         .option-group label {
-            font-size: 0.875rem;
-            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
             color: var(--text-secondary-color);
         }
-        select, button {
-            background-color: var(--bg-color);
+        
+        .option-group.age-group {
+            grid-column: span 2;
+        }
+
+        select, input[type="range"] {
+            padding: 0.75rem;
+            background-color: var(--background-color-internal);
             border: 1px solid var(--border-color);
-            transition: background-color 0.2s, border-color 0.2s;
+            border-radius: 8px;
             color: var(--text-color);
-        }
-        select {
+            font-family: inherit;
             width: 100%;
-            padding: 0.5rem;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
         }
-        select option {
-            background-color: var(--bg-color);
+
+        .buttons-container {
+            display: flex;
+            gap: 1rem;
         }
-        select:hover, button:hover {
-            border-color: var(--primary-color);
-        }
-        select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-        #start-button {
-            width: 100%;
-            height: 2.5rem;
-            border-radius: 0.375rem;
-            font-weight: 600;
-            color: var(--text-on-primary);
-            transition: transform 0.1s, background-color 0.2s;
+
+        #startButton, #stopButton {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
             background-color: var(--primary-color);
-            border-color: var(--primary-color);
+            color: var(--text-on-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease, color 0.3s ease;
+            flex-grow: 1;
         }
-        #start-button:active {
-            transform: scale(0.95);
+        
+        #startButton:hover, #stopButton:hover {
+            opacity: 0.9;
         }
-        button:disabled {
-            opacity: 0.5;
+
+        #startButton:active, #stopButton:active {
+            transform: scale(0.98);
+        }
+
+        #startButton:disabled, #stopButton:disabled {
+            background-color: #555;
+            color: #888;
             cursor: not-allowed;
         }
+        
+        #stopButton {
+            background-color: var(--incorrect-color);
+        }
 
-        /* --- STATS DISPLAY --- */
-        #stats-display {
+        /* Stats Display */
+        .stats {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 1rem;
             text-align: center;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            background-color: var(--bg-color);
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--background-color-internal);
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
         }
-        #stats-display .stat-value {
-            font-size: 1.875rem; /* 30px */
+
+        .stat {
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--primary-color);
         }
-        #stats-display .stat-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+
+        .stat-label {
+            font-size: 0.8rem;
             color: var(--text-secondary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-value {
+             color: var(--primary-color);
+             transition: color 0.3s ease;
         }
 
-        /* --- TYPING AREA --- */
-        #code-display-wrapper {
-            position: relative;
-            height: 16rem; /* 256px */
-            overflow: auto;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            font-size: 1.125rem;
-            font-family: var(--font-code);
-            line-height: 1.7;
-            tab-size: 4;
-            -moz-tab-size: 4;
-            background-color: var(--bg-color);
-        }
-        #code-display {
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
-        #code-display.faded {
-            opacity: 0.5;
-        }
-        .char {
-            transition: color 0.1s ease, background-color 0.1s ease;
-        }
-        .char.correct { color: var(--correct-color); }
-        .char.incorrect { color: var(--incorrect-color); background-color: rgba(248, 81, 73, 0.15); }
-        .cursor {
-            border-left: 2px solid var(--primary-color);
-            margin-left: -2px;
-            animation: blink 1s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        #user-input {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            padding: 1rem;
-            background: transparent;
-            color: transparent;
-            caret-color: transparent;
-            resize: none;
-            border: none;
-            outline: none;
+        .stat-sub-value {
+            font-size: 0.75rem;
+            color: var(--text-secondary-color);
+            margin-top: -5px;
+            display: block;
         }
 
-        /* --- LOADING & RESULTS MODAL --- */
-        #loading-spinner {
-            display: none;
-            position: absolute;
-            inset: 0;
-            background-color: rgba(0,0,0,0.2);
-            backdrop-filter: blur(2px);
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
+        /* Typing Area */
+        #wordsWrapper {
+            font-size: 1.8rem;
+            letter-spacing: 1.5px;
+            line-height: 2.2;
+            padding: 1.5rem;
+            background-color: var(--background-color-internal);
+            border-radius: 12px;
+            height: 160px;
+            overflow-y: auto;
+            color: var(--text-secondary-color);
+            margin-bottom: 1.5rem;
+            transition: background-color 0.3s ease;
+            display: flex; /* Use flexbox for wrapping */
+            flex-wrap: wrap; /* Allow words to wrap to the next line */
+            align-content: flex-start; /* Align lines to the top */
         }
-        #loading-spinner.visible {
-            display: flex;
+        
+        .word {
+            margin-right: 0.6rem; /* Space between words */
+            margin-bottom: 0.6rem; /* Space between lines */
         }
-        .loader {
-            width: 48px; height: 48px;
-            border: 3px solid var(--text-color);
-            border-radius: 50%;
-            display: inline-block;
-            position: relative;
-            animation: rotation 1s linear infinite;
-        }
-        .loader::after {
-            content: '';  
-            box-sizing: border-box;
-            position: absolute;
-            left: 50%; top: 50%;
-            transform: translate(-50%, -50%);
-            width: 56px; height: 56px;
-            border-radius: 50%;
-            border: 3px solid;
-            border-color: var(--primary-color) transparent;
-        }
-        @keyframes rotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        #results-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0,0,0,0.7);
-            align-items: center;
-            justify-content: center;
-            z-index: 50;
-            padding: 1rem;
-        }
-        #results-modal.visible {
-            display: flex;
-        }
-        .results-content {
-            border-radius: 1rem;
-            padding: 2rem;
+
+        #wordsWrapper .loading-text {
+            width: 100%;
             text-align: center;
-            width: 100%;
-            max-width: 28rem;
-            transform: scale(0.95);
-            opacity: 0;
-            transition: all 0.2s ease-out;
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
-        }
-        #results-modal.visible .results-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-        .results-content h2 {
-            font-size: 1.875rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            text-align: left;
-            margin: 1.5rem 0;
-        }
-        #restart-button {
-            width: 100%;
-            height: 3rem;
-            border-radius: 0.375rem;
-            font-weight: 600;
-            color: var(--text-on-primary);
-            background-color: var(--primary-color);
+            animation: pulse 1.5s ease-in-out infinite;
         }
 
-        /* --- FOOTER --- */
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        .word.correct {
+            color: var(--correct-color);
+        }
+        
+        .word.incorrect {
+            color: var(--incorrect-color);
+        }
+
+        .word .char.correct {
+            color: var(--correct-color);
+        }
+        
+        .word .char.incorrect {
+            color: var(--incorrect-color);
+        }
+
+        .word.current {
+            background-color: var(--primary-color);
+            color: var(--text-on-primary);
+            border-radius: 6px;
+            padding: 2px 6px;
+            border-bottom: 3px solid rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* User Input Field */
+        #userInput {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.8rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background-color: var(--background-color-internal);
+            color: var(--text-color);
+            font-family: inherit;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        #userInput:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        #userInput:disabled {
+            background-color: var(--surface-color);
+        }
+
+        /* Final Results Section */
+        #results {
+            margin-top: 1.5rem;
+            text-align: center;
+            padding: 2rem;
+            background: var(--background-color-internal);
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+        }
+        
+        #results.hidden {
+            display: none;
+        }
+
+        #results h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        #results p {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
         .footer {
             margin-top: 2.5rem;
             text-align: center;
         }
+
         .footer p {
             color: var(--text-secondary-color);
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
+
         .footer a.developer {
             font-family: var(--font-cursive);
             font-size: 1.5rem;
@@ -458,495 +507,572 @@
             text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.5);
             animation: gradient-text-flow 4s linear infinite;
             transition: text-shadow 0.3s ease;
-            text-decoration: none;
         }
+
         @keyframes gradient-text-flow {
             0% { background-position: 200% center; }
             100% { background-position: 0% center; }
         }
+
         .footer .copyright {
             font-size: 0.8rem;
         }
+
         .footer .mobile-break {
             display: none;
         }
 
-        /* --- RESPONSIVE DESIGN --- */
-        @media (min-width: 768px) {
-            .header h1 { font-size: 3rem; }
-            .content-wrapper { padding: 2.5rem; }
-            #options-bar { grid-template-columns: repeat(4, 1fr); }
-            #stats-display { grid-template-columns: repeat(4, 1fr); }
-        }
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .footer .mobile-break { display: block; }
-            .main-nav { position: static; transform: none; margin-bottom: 1.5rem; }
-            .header { padding-top: 0; }
+            .options {
+                grid-template-columns: 1fr 1fr;
+            }
+            .option-group.age-group {
+                grid-column: span 2;
+            }
+            .container {
+                padding: 1.5rem;
+            }
+            .buttons-container {
+                grid-column: 1 / -1;
+            }
+            .stats {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+            .footer p {
+                font-size: 0.8rem;
+            }
+            .footer .dev-credit {
+                display: block;
+            }
+            .footer a.developer {
+                font-size: 1.2rem;
+            }
+            .footer .mobile-break {
+                display: block;
+            }
         }
     </style>
 </head>
-<body>
+<body data-theme="amethyst">
 
-    <div class="main-container">
-        <!-- Navigation Menu -->
-        <nav class="main-nav">
-            <a href="./index.html" class="nav-btn">General Test</a>
-            <a href="./coding-test.html" class="nav-btn active">Coding Test</a>
-        </nav>
+    <nav class="main-nav">
+        <a href="./index.html" class="nav-link active">General Test</a>
+        <a href="./coding-test.html" class="nav-link">Coding Test</a>
+    </nav>
 
-        <main class="content-wrapper main-panel">
-             <button id="themeSwitcher" title="Change Theme">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"></circle><path d="M16.2 7.8a6 6 0 0 0-8.4 0"></path><path d="M7.8 16.2a6 6 0 0 0 8.4 0"></path><path d="M12 2a10 10 0 1 0 10 10"></path></svg>
-            </button>
-            <header class="header">
-                <h1>Suyena Coding Test</h1>
-                <p>Hone your coding speed and accuracy with AI.</p>
-            </header>
-            
-            <!-- Options Bar -->
-            <section id="options-bar">
-                <div class="option-group">
-                    <label for="language-select">Language</label>
-                    <select id="language-select">
-                        <option value="JavaScript">JavaScript</option>
-                        <option value="Python">Python</option>
-                        <option value="HTML">HTML</option>
-                        <option value="CSS">CSS</option>
-                        <option value="Java">Java</option>
-                    </select>
-                </div>
-                <div class="option-group">
-                    <label for="difficulty-select">Difficulty</label>
-                    <select id="difficulty-select">
-                        <option value="Beginner">Beginner</option>
-                        <option value="Intermediate">Intermediate</option>
-                        <option value="Advanced">Advanced</option>
-                    </select>
-                </div>
-                <div class="option-group">
-                    <label for="duration-select">Duration</label>
-                    <select id="duration-select">
-                        <option value="30">30 sec</option>
-                        <option value="60" selected>1 min</option>
-                        <option value="120">2 min</option>
-                        <option value="180">3 min</option>
-                        <option value="300">5 min</option>
-                        <option value="0">Infinite</option>
-                    </select>
-                </div>
-                 <button id="start-button">Start</button>
-            </section>
+    <main class="container">
+        <button id="themeSwitcher" title="Change Theme">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"></circle><path d="M16.2 7.8a6 6 0 0 0-8.4 0"></path><path d="M7.8 16.2a6 6 0 0 0 8.4 0"></path><path d="M12 2a10 10 0 1 0 10 10"></path></svg>
+        </button>
+        <header class="header">
+            <h1>Suyena Typing Test</h1>
+            <p>Test your typing speed in multiple languages with AI-generated text.</p>
+        </header>
 
-            <!-- Stats Display -->
-            <section id="stats-display" class="main-panel">
-                <div>
-                    <div id="wpm-value" class="stat-value">0</div>
-                    <div class="stat-label">WPM</div>
-                </div>
-                <div>
-                    <div id="cpm-value" class="stat-value">0</div>
-                    <div class="stat-label">CPM</div>
-                </div>
-                <div>
-                    <div id="accuracy-value" class="stat-value">100%</div>
-                    <div class="stat-label">Accuracy</div>
-                </div>
-                <div>
-                    <div id="time-value" class="stat-value">0:00</div>
-                    <div class="stat-label">Time</div>
-                </div>
-            </section>
-
-            <!-- Typing Area -->
-            <div id="code-display-wrapper" class="main-panel">
-                <div id="loading-spinner">
-                   <div class="loader"></div>
-                   <p style="margin-top: 1rem; font-size: 1.125rem;">Generating Code Snippet...</p>
-                </div>
-                <div id="code-display" class="faded">
-                    <span class="char cursor"></span><span class="char">S</span><span class="char">e</span><span class="char">l</span><span class="char">e</span><span class="char">c</span><span class="char">t</span><span class="char"> </span><span class="char">y</span><span class="char">o</span><span class="char">u</span><span class="char">r</span><span class="char"> </span><span class="char">o</span><span class="char">p</span><span class="char">t</span><span class="char">i</span><span class="char">o</span><span class="char">n</span><span class="char">s</span><span class="char"> </span><span class="char">a</span><span class="char">n</span><span class="char">d</span><span class="char"> </span><span class="char">c</span><span class="char">l</span><span class="char">i</span><span class="char">c</span><span class="char">k</span><span class="char"> </span><span class="char">S</span><span class="char">t</span><span class="char">a</span><span class="char">r</span><span class="char">t</span><span class="char">.</span>
-                </div>
-                <textarea id="user-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" disabled></textarea>
+        <section class="options">
+            <div class="option-group">
+                <label for="languageSelect">Language</label>
+                <select id="languageSelect">
+                    <option value="Bengali">Bengali (বাংলা)</option>
+                    <option value="English" selected>English</option>
+                    <option value="Hindi">Hindi (हिन्दी)</option>
+                    <option value="Spanish">Spanish (Español)</option>
+                </select>
             </div>
-        </main>
-    </div>
-    
-    <!-- Results Modal -->
-    <div id="results-modal">
-        <div class="results-content">
-            <h2>Test Complete!</h2>
-            <div class="results-grid">
-                <p><strong>WPM:</strong> <span id="final-wpm">0</span></p>
-                <p><strong>CPM:</strong> <span id="final-cpm">0</span></p>
-                <p><strong>Accuracy:</strong> <span id="final-accuracy">100%</span></p>
-                <p><strong>Characters Typed:</strong> <span id="final-chars">0</span></p>
+            <div class="option-group">
+                <label for="durationSelect">Duration</label>
+                <select id="durationSelect">
+                    <option value="60">1 minute</option>
+                    <option value="180">3 minutes</option>
+                    <option value="300">5 minutes</option>
+                    <option value="600">10 minutes</option>
+                    <option value="900">15 minutes</option>
+                    <option value="1200">20 minutes</option>
+                    <option value="1800">30 minutes</option>
+                    <option value="2700">45 minutes</option>
+                    <option value="3600">1 hour</option>
+                    <option value="0">Infinite</option>
+                </select>
             </div>
-            <button id="restart-button">Try Again</button>
+            <div class="option-group">
+                <label for="contentTypeSelect">Content Type</label>
+                <select id="contentTypeSelect">
+                    <option value="general text">General</option>
+                    <option value="an article">Article</option>
+                    <option value="a story">Story</option>
+                </select>
+            </div>
+            <div class="option-group">
+                <label for="subjectSelect">Subject</label>
+                <select id="subjectSelect">
+                    <option value="a random topic">Random</option>
+                    <option value="Technology">Technology</option>
+                    <option value="History">History</option>
+                    <option value="Science">Science</option>
+                    <option value="Self-Help">Self-Help</option>
+                    <option value="inspirational or motivational topics">Inspirational</option>
+                    <option value="assertiveness">Assertive</option>
+                    <option value="family">Family</option>
+                    <option value="relationships">Relationships</option>
+                    <option value="wellbeing">Wellbeing</option>
+                </select>
+            </div>
+            <div class="option-group age-group">
+                <label for="ageRange">Age Level (<span id="ageValue">18</span> years)</label>
+                <input type="range" id="ageRange" min="10" max="80" value="18">
+            </div>
+            <div class="buttons-container">
+                <button id="startButton">Start</button>
+                <button id="stopButton" style="display: none;">Stop</button>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div>
+                <div class="stat"><span id="wpmValue" class="stat-value">0</span></div>
+                <div class="stat-label">WPM</div>
+                <span class="stat-sub-value">(<span id="totalWordsValue">0</span> words)</span>
+            </div>
+            <div>
+                <div class="stat"><span id="cpmValue" class="stat-value">0</span></div>
+                <div class="stat-label">CPM</div>
+                <span class="stat-sub-value">(<span id="totalCharsValue">0</span> chars)</span>
+            </div>
+             <div>
+                <div class="stat"><span id="pagesValue" class="stat-value">0.00</span></div>
+                <div class="stat-label">Pages</div>
+            </div>
+            <div>
+                <div class="stat"><span id="accuracyValue" class="stat-value">100</span>%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+            <div>
+                <div class="stat"><span id="timeValue" class="stat-value">0:00</span></div>
+                <div class="stat-label">Time</div>
+            </div>
+        </section>
+
+        <div id="wordsWrapper">
+            Select your options and click "Start" to begin.
         </div>
-    </div>
+        <input type="text" id="userInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" disabled>
+
+        <section id="results" class="hidden">
+            <h2>Time's Up!</h2>
+            <p id="finalWpm"></p>
+            <p id="finalCpm"></p>
+            <p id="finalAccuracy"></p>
+            <p id="totalWordsTyped"></p>
+            <p id="totalCharsTyped"></p>
+            <p id="totalPagesTyped"></p>
+        </section>
+    </main>
 
     <footer class="footer">
         <p><span class="dev-credit">Designed & Developed by</span> <a href="https://asad.suyena.com" target="_blank" class="developer">Md Asad Chowdhary</a></p>
         <p class="copyright">© <span id="copyrightYear"></span> Suyena Advance Society. <br class="mobile-break">All Rights Reserved.</p>
     </footer>
-
+    
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- CONFIGURATION ---
-            const API_KEY = ""; // Leave blank to use environment-provided key
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- CONFIGURATION ---
+        // To use your own API key, replace "" with your key.
+        // If left blank, it will use the key provided by the environment.
+        const apiKey = "AIzaSyDMeorM8ab5DYNXHHlD3k9e0VTkTWeOXWA"; 
 
-            // --- DOM ELEMENTS ---
-            const elements = {
-                body: document.body,
-                languageSelect: document.getElementById('language-select'),
-                difficultySelect: document.getElementById('difficulty-select'),
-                durationSelect: document.getElementById('duration-select'),
-                startButton: document.getElementById('start-button'),
-                wpmValue: document.getElementById('wpm-value'),
-                cpmValue: document.getElementById('cpm-value'),
-                accuracyValue: document.getElementById('accuracy-value'),
-                timeValue: document.getElementById('time-value'),
-                codeDisplay: document.getElementById('code-display'),
-                userInput: document.getElementById('user-input'),
-                loadingSpinner: document.getElementById('loading-spinner'),
-                resultsModal: document.getElementById('results-modal'),
-                finalWpm: document.getElementById('final-wpm'),
-                finalCpm: document.getElementById('final-cpm'),
-                finalAccuracy: document.getElementById('final-accuracy'),
-                finalChars: document.getElementById('final-chars'),
-                restartButton: document.getElementById('restart-button'),
-                optionsBar: document.getElementById('options-bar'),
-                copyrightYear: document.getElementById('copyrightYear'),
-                themeSwitcher: document.getElementById('themeSwitcher'),
-            };
+        // DOM Elements
+        const languageSelect = document.getElementById('languageSelect');
+        const durationSelect = document.getElementById('durationSelect');
+        const contentTypeSelect = document.getElementById('contentTypeSelect');
+        const subjectSelect = document.getElementById('subjectSelect');
+        const ageRange = document.getElementById('ageRange');
+        const ageValue = document.getElementById('ageValue');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const wpmValue = document.getElementById('wpmValue');
+        const cpmValue = document.getElementById('cpmValue');
+        const accuracyValue = document.getElementById('accuracyValue');
+        const timeValue = document.getElementById('timeValue');
+        const pagesValue = document.getElementById('pagesValue');
+        const totalWordsValue = document.getElementById('totalWordsValue');
+        const totalCharsValue = document.getElementById('totalCharsValue');
+        const wordsWrapper = document.getElementById('wordsWrapper');
+        const userInput = document.getElementById('userInput');
+        const resultsSection = document.getElementById('results');
+        const finalWpm = document.getElementById('finalWpm');
+        const finalCpm = document.getElementById('finalCpm');
+        const finalAccuracy = document.getElementById('finalAccuracy');
+        const totalWordsTyped = document.getElementById('totalWordsTyped');
+        const totalCharsTyped = document.getElementById('totalCharsTyped');
+        const totalPagesTyped = document.getElementById('totalPagesTyped');
+        const themeSwitcher = document.getElementById('themeSwitcher');
+        const body = document.body;
+        const copyrightYear = document.getElementById('copyrightYear');
 
-            // --- STATE MANAGEMENT ---
-            let state = {
-                themes: ['ocean', 'amethyst', 'dark', 'sunset', 'forest', 'rose'],
-                currentThemeIndex: 0,
-                codeSnippet: '',
-                charElements: [],
-                currentIndex: 0,
-                timeRemaining: 60,
-                startTime: 0,
-                timerInterval: null,
-                gameState: 'waiting', // waiting, running, finished
-                totalTyped: 0,
-                correctTyped: 0,
-                isFetchingNextBatch: false,
-            };
+        // State
+        let state = {
+            language: 'English', duration: 60, contentType: 'general text', subject: 'a random topic', age: 18,
+            words: [], currentWordIndex: 0, timeRemaining: 60, wpm: 0, cpm: 0, accuracy: 100, pages: 0,
+            gameState: 'waiting', timerInterval: null, startTime: 0, totalTypedChars: 0, correctTypedChars: 0,
+            correctTypedWords: 0, isFetchingNextBatch: false,
+        };
+        
+        const themes = ['amethyst', 'dark', 'sunset', 'ocean', 'forest', 'rose'];
+        let currentThemeIndex = 0;
+        let loadingInterval = null;
 
-            // --- CORE LOGIC ---
-            const init = () => {
-                elements.copyrightYear.textContent = new Date().getFullYear();
-                setupEventListeners();
-                loadTheme();
-                resetGame();
-            };
+        const subjectTranslations = {
+            'English': { 'a random topic': 'Random', 'Technology': 'Technology', 'History': 'History', 'Science': 'Science', 'Self-Help': 'Self-Help', 'inspirational or motivational topics': 'Inspirational', 'assertiveness': 'Assertive', 'family': 'Family', 'relationships': 'Relationships', 'wellbeing': 'Wellbeing' },
+            'Bengali': { 'a random topic': 'এলোমেলো', 'Technology': 'প্রযুক্তি', 'History': 'ইতিহাস', 'Science': 'বিজ্ঞান', 'Self-Help': 'আত্ম-সহায়তা', 'inspirational or motivational topics': 'অনুপ্রেরণামূলক', 'assertiveness': 'দৃঢ়তা', 'family': 'পরিবার', 'relationships': 'সম্পর্ক', 'wellbeing': 'সুস্থতা' },
+            'Hindi': { 'a random topic': 'यादृच्छিক', 'Technology': 'प्रौद्योगिकी', 'History': 'इतिहास', 'Science': 'विज्ञान', 'Self-Help': 'स्व-सहायता', 'inspirational or motivational topics': 'प्रेরणादायक', 'assertiveness': 'दृढ़ता', 'family': 'परिवार', 'relationships': 'रिश्ते', 'wellbeing': 'কल्याण' },
+            'Spanish': { 'a random topic': 'Aleatorio', 'Technology': 'Tecnología', 'History': 'Historia', 'Science': 'Ciencia', 'Self-Help': 'Autoayuda', 'inspirational or motivational topics': 'Inspirador', 'assertiveness': 'Asertividad', 'family': 'Familia', 'relationships': 'Relaciones', 'wellbeing': 'Bienestar' }
+        };
 
-            const setupEventListeners = () => {
-                elements.startButton.addEventListener('click', () => {
-                    if (state.gameState === 'running') endGame();
-                    else startGame();
-                });
-                elements.restartButton.addEventListener('click', () => {
-                    hideResults();
-                    resetGame();
-                });
-                elements.userInput.addEventListener('input', handleInput);
-                elements.userInput.addEventListener('keydown', handleKeyDown);
-                elements.themeSwitcher.addEventListener('click', switchTheme);
-                elements.durationSelect.addEventListener('change', () => {
-                    if (state.gameState === 'waiting') {
-                        const duration = parseInt(elements.durationSelect.value, 10);
-                        state.timeRemaining = duration === 0 ? 0 : duration;
-                        updateTimeDisplay();
-                    }
-                });
-            };
-
-            const startGame = async () => {
-                resetGame();
-                state.gameState = 'running';
-                updateUIForState();
-                elements.loadingSpinner.classList.add('visible');
-                
-                try {
-                    const code = await fetchCodeSnippet(true);
-                    state.codeSnippet = code;
-                    renderCodeSnippet();
-                    elements.userInput.disabled = false;
-                    elements.userInput.focus();
-                } catch (error) {
-                    console.error("Failed to start game:", error);
-                    elements.codeDisplay.textContent = `Error: ${error.message}. Please try again.`;
-                    resetGame();
-                } finally {
-                    elements.loadingSpinner.classList.remove('visible');
+        const updateSubjectTranslations = () => {
+            const currentTranslations = subjectTranslations[state.language];
+            const options = subjectSelect.options;
+            for (let i = 0; i < options.length; i++) {
+                const value = options[i].value;
+                if (currentTranslations[value]) {
+                    options[i].textContent = currentTranslations[value];
                 }
+            }
+        };
+
+        const savePreferences = () => {
+            const prefs = {
+                language: state.language, duration: state.duration, contentType: state.contentType,
+                subject: state.subject, age: state.age,
             };
+            localStorage.setItem('typingTestPrefs', JSON.stringify(prefs));
+        };
+
+        const loadPreferences = () => {
+            const savedPrefs = localStorage.getItem('typingTestPrefs');
+            if (savedPrefs) {
+                const prefs = JSON.parse(savedPrefs);
+                Object.assign(state, prefs);
+            }
+            languageSelect.value = state.language;
+            durationSelect.value = state.duration;
+            contentTypeSelect.value = state.contentType;
+            subjectSelect.value = state.subject;
+            ageRange.value = state.age;
+            ageValue.textContent = state.age;
+        };
+
+        const switchTheme = () => {
+            let newThemeIndex = currentThemeIndex;
+            while (newThemeIndex === currentThemeIndex) {
+                newThemeIndex = Math.floor(Math.random() * themes.length);
+            }
+            currentThemeIndex = newThemeIndex;
+            const newTheme = themes[currentThemeIndex];
+            body.dataset.theme = newTheme;
+            localStorage.setItem('typingTestTheme', newTheme);
+        };
+
+        const loadTheme = () => {
+            const savedTheme = localStorage.getItem('typingTestTheme') || 'amethyst';
+            currentThemeIndex = themes.indexOf(savedTheme);
+            if (currentThemeIndex === -1) currentThemeIndex = 0;
+            body.dataset.theme = themes[currentThemeIndex];
+        };
+
+        const startGame = async () => {
+            resetGame();
+            state.gameState = 'running';
+            updateUIForState();
+            userInput.disabled = false;
+            userInput.focus();
             
-            const resetGame = () => {
-                clearInterval(state.timerInterval);
-                const duration = parseInt(elements.durationSelect.value, 10);
-                state = {
-                    ...state,
-                    codeSnippet: '',
-                    charElements: [],
-                    currentIndex: 0,
-                    timeRemaining: duration === 0 ? 0 : duration,
-                    startTime: 0,
-                    timerInterval: null,
-                    gameState: 'waiting',
-                    totalTyped: 0,
-                    correctTyped: 0,
-                    isFetchingNextBatch: false,
-                };
-                elements.userInput.value = '';
-                elements.userInput.disabled = true;
-                elements.codeDisplay.innerHTML = `<span class="char cursor"></span><span class="char">S</span><span class="char">e</span><span class="char">l</span><span class="char">e</span><span class="char">c</span><span class="char">t</span><span class="char"> </span><span class="char">y</span><span class="char">o</span><span class="char">u</span><span class="char">r</span><span class="char"> </span><span class="char">o</span><span class="char">p</span><span class="char">t</span><span class="char">i</span><span class="char">o</span><span class="char">n</span><span class="char">s</span><span class="char"> </span><span class="char">a</span><span class="char">n</span><span class="char">d</span><span class="char"> </span><span class="char">c</span><span class="char">l</span><span class="char">i</span><span class="char">c</span><span class="char">k</span><span class="char"> </span><span class="char">S</span><span class="char">t</span><span class="char">a</span><span class="char">r</span><span class="char">t</span><span class="char">.</span>`;
-                elements.codeDisplay.classList.add('faded');
-                updateStatsDisplay(0, 0, 100);
+            const loadingMessages = ['Generating text.', 'Generating text..', 'Generating text...'];
+            let messageIndex = 0;
+            wordsWrapper.innerHTML = `<span class="loading-text">${loadingMessages[0]}</span>`;
+            loadingInterval = setInterval(() => {
+                messageIndex = (messageIndex + 1) % loadingMessages.length;
+                wordsWrapper.innerHTML = `<span class="loading-text">${loadingMessages[messageIndex]}</span>`;
+            }, 600);
+
+            try {
+                const text = await fetchTextFromAI(true);
+                clearInterval(loadingInterval);
+                state.words = text.trim().split(' ');
+                renderWords();
+            } catch (error) {
+                clearInterval(loadingInterval);
+                console.error("Error fetching text from AI:", error);
+                wordsWrapper.innerHTML = `Error: ${error.message}. Please check your connection and try again.`;
+                resetGame();
+            }
+        };
+
+        const endGame = () => {
+            if (state.gameState !== 'running') return;
+            clearInterval(state.timerInterval);
+            state.gameState = 'finished';
+            calculateStats();
+            finalWpm.textContent = `WPM: ${state.wpm}`;
+            finalCpm.textContent = `CPM: ${state.cpm}`;
+            finalAccuracy.textContent = `Accuracy: ${state.accuracy}%`;
+            totalWordsTyped.textContent = `Total Words: ${state.correctTypedWords}`;
+            totalCharsTyped.textContent = `Total Characters: ${state.correctTypedChars}`;
+            totalPagesTyped.textContent = `Pages Typed: ${state.pages.toFixed(2)}`;
+            resultsSection.classList.remove('hidden');
+            userInput.disabled = true;
+            updateUIForState();
+        };
+
+        const resetGame = () => {
+            clearInterval(state.timerInterval);
+            clearInterval(loadingInterval);
+            Object.assign(state, {
+                gameState: 'waiting', startTime: 0, wpm: 0, cpm: 0, accuracy: 100, pages: 0,
+                totalTypedChars: 0, correctTypedChars: 0, correctTypedWords: 0,
+                currentWordIndex: 0, words: [], isFetchingNextBatch: false,
+            });
+            state.duration = parseInt(durationSelect.value, 10);
+            state.timeRemaining = state.duration;
+            userInput.value = '';
+            userInput.disabled = true;
+            wordsWrapper.innerHTML = 'Select your options and click "Start" to begin.';
+            resultsSection.classList.add('hidden');
+            updateStatsDisplay();
+            updateTimeDisplay();
+            updateUIForState();
+        };
+
+        const fetchTextFromAI = async (isInitialFetch = false) => {
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            
+            const wordCount = isInitialFetch ? 150 : 250;
+
+            const promptDetail = `a text of about ${wordCount} words for ${state.contentType} about ${state.subject}, suitable for a ${state.age}-year-old to read, for a typing test. Do not include any formatting, titles, or introduction.`;
+            const prompt = `Generate ${promptDetail} in the ${state.language} language.`;
+            const requestBody = {
+                contents: [{ parts: [{ text: prompt }] }],
+                generationConfig: { temperature: 0.7, maxOutputTokens: 8192 }
+            };
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody)
+            });
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error?.message || `API request failed`);
+            }
+            const data = await response.json();
+            const rawText = data.candidates[0].content.parts[0].text;
+            return rawText.replace(/[\*#]/g, '').replace(/\s+/g, ' ').trim();
+        };
+        
+        const fetchAndAppendText = async () => {
+            state.isFetchingNextBatch = true;
+            try {
+                const text = await fetchTextFromAI(false);
+                const newWords = text.trim().split(' ');
+                state.words.push(...newWords);
+                appendWordsToDOM(newWords);
+            } catch (error) {
+                console.error("Error fetching next batch of text:", error);
+            } finally {
+                state.isFetchingNextBatch = false;
+            }
+        };
+
+        const appendWordsToDOM = (newWords) => {
+            newWords.forEach(word => {
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'word';
+                wordSpan.textContent = word;
+                wordsWrapper.appendChild(wordSpan);
+            });
+        };
+
+        const renderWords = () => {
+            wordsWrapper.innerHTML = '';
+            wordsWrapper.style.fontFamily = state.language === 'Bengali' ? 'var(--font-bengali)' : (state.language === 'Hindi' ? 'var(--font-hindi)' : 'var(--font-primary)');
+            state.words.forEach(word => {
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'word';
+                wordSpan.textContent = word;
+                wordsWrapper.appendChild(wordSpan);
+            });
+            if (wordsWrapper.children.length > 0) {
+                wordsWrapper.children[0].classList.add('current');
+            }
+        };
+
+        const updateUIForState = () => {
+            if (state.gameState === 'running') {
+                startButton.textContent = 'Restart';
+                stopButton.style.display = 'block';
+                languageSelect.disabled = true;
+                durationSelect.disabled = true;
+                contentTypeSelect.disabled = true;
+                subjectSelect.disabled = true;
+                ageRange.disabled = true;
+            } else {
+                startButton.textContent = 'Start';
+                stopButton.style.display = 'none';
+                languageSelect.disabled = false;
+                durationSelect.disabled = false;
+                contentTypeSelect.disabled = false;
+                subjectSelect.disabled = false;
+                ageRange.disabled = false;
+            }
+        };
+        
+        const updateStatsDisplay = () => {
+            wpmValue.textContent = state.wpm;
+            cpmValue.textContent = state.cpm;
+            accuracyValue.textContent = state.accuracy;
+            pagesValue.textContent = state.pages.toFixed(2);
+            totalWordsValue.textContent = state.correctTypedWords;
+            totalCharsValue.textContent = state.correctTypedChars;
+        };
+
+        const updateTimeDisplay = () => {
+            const minutes = Math.floor(state.timeRemaining / 60);
+            const seconds = state.timeRemaining % 60;
+            timeValue.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        };
+
+        const startTimer = () => {
+            clearInterval(state.timerInterval);
+            state.timeRemaining = state.duration === 0 ? 0 : state.duration;
+            updateTimeDisplay();
+            state.timerInterval = setInterval(() => {
+                state.duration === 0 ? state.timeRemaining++ : state.timeRemaining--;
                 updateTimeDisplay();
-                updateUIForState();
-            };
-
-            const endGame = () => {
-                if (state.gameState !== 'running') return;
-                clearInterval(state.timerInterval);
-                state.gameState = 'finished';
-                elements.userInput.disabled = true;
-                updateUIForState();
-                showResults();
-            };
-
-            const fetchCodeSnippet = async (isInitialFetch = false) => {
-                const language = elements.languageSelect.value;
-                const difficulty = elements.difficultySelect.value;
-                const prompt = `Generate a ${difficulty}-level code snippet in ${language}. The code should be around ${isInitialFetch ? '10-15' : '8-12'} lines long. ${isInitialFetch ? 'Start the snippet with a single-line comment explaining its purpose.' : ''} Provide only the raw code without any other explanation or markdown formatting.`;
-                
-                const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${API_KEY}`;
-                
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }],
-                        generationConfig: { temperature: 0.5, maxOutputTokens: 2048 }
-                    })
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error?.message || 'API request failed');
-                }
-
-                const data = await response.json();
-                return data.candidates[0].content.parts[0].text.trim();
-            };
-
-            const fetchAndAppendText = async () => {
-                state.isFetchingNextBatch = true;
-                try {
-                    const newCode = await fetchCodeSnippet(false);
-                    const newSnippet = '\n' + newCode;
-                    state.codeSnippet += newSnippet;
-                    
-                    newSnippet.split('').forEach(char => {
-                        const span = document.createElement('span');
-                        span.className = 'char';
-                        span.textContent = char;
-                        elements.codeDisplay.appendChild(span);
-                        state.charElements.push(span);
-                    });
-                } catch (error) {
-                    console.error("Error fetching next batch of code:", error);
-                } finally {
-                    state.isFetchingNextBatch = false;
-                }
-            };
-
-            const renderCodeSnippet = () => {
-                elements.codeDisplay.innerHTML = '';
-                elements.codeDisplay.classList.remove('faded');
-                state.charElements = state.codeSnippet.split('').map(char => {
-                    const span = document.createElement('span');
-                    span.className = 'char';
-                    span.textContent = char;
-                    elements.codeDisplay.appendChild(span);
-                    return span;
-                });
-                state.charElements[0]?.classList.add('cursor');
-            };
-            
-            const handleInput = (e) => {
-                if (state.gameState !== 'running' || state.currentIndex >= state.codeSnippet.length) return;
-                
-                if (state.startTime === 0) {
-                    state.startTime = Date.now();
-                    startTimer();
-                }
-
-                const typedChar = e.target.value.slice(-1);
-                const expectedChar = state.codeSnippet[state.currentIndex];
-                const currentElement = state.charElements[state.currentIndex];
-                
-                state.totalTyped++;
-                if (typedChar === expectedChar) {
-                    state.correctTyped++;
-                    currentElement.classList.add('correct');
-                } else {
-                    currentElement.classList.add('incorrect');
-                }
-                
-                currentElement.classList.remove('cursor');
-                state.currentIndex++;
-
-                if (typedChar === '\n' && expectedChar === '\n') {
-                    while (state.currentIndex < state.codeSnippet.length) {
-                        const nextChar = state.codeSnippet[state.currentIndex];
-                        if (nextChar === ' ' || nextChar === '\t') {
-                            state.charElements[state.currentIndex].classList.add('correct');
-                            state.totalTyped++;
-                            state.correctTyped++;
-                            elements.userInput.value += nextChar;
-                            state.currentIndex++;
-                        } else {
-                            break;
-                        }
-                    }
-                }
-                
-                const isInfiniteMode = parseInt(elements.durationSelect.value, 10) === 0;
-                if (isInfiniteMode && !state.isFetchingNextBatch && (state.codeSnippet.length - state.currentIndex < 50)) {
-                    fetchAndAppendText();
-                }
-
-                if (state.currentIndex < state.codeSnippet.length) {
-                    state.charElements[state.currentIndex].classList.add('cursor');
-                    state.charElements[state.currentIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                } else if (!isInfiniteMode) {
+                calculateStats();
+                updateStatsDisplay();
+                if (state.duration !== 0 && state.timeRemaining <= 0) {
                     endGame();
                 }
-                
-                updateStats();
-            };
+            }, 1000);
+        };
+        
+        const handleInput = (e) => {
+            if (state.gameState !== 'running') return;
+            if (state.startTime === 0) {
+                state.startTime = Date.now();
+                startTimer();
+            }
 
-            const handleKeyDown = (e) => {
-                if (state.gameState !== 'running') return;
+            const typedValue = userInput.value;
+            if (typedValue.endsWith(' ')) {
+                validateWord();
+            } else if (state.language === 'English' || state.language === 'Spanish') {
+                const currentWordElement = wordsWrapper.children[state.currentWordIndex];
+                if (!currentWordElement) return;
+
+                const currentWordText = state.words[state.currentWordIndex].normalize('NFC');
                 
-                if (e.key === 'Backspace') {
-                    e.preventDefault();
-                    if (state.currentIndex > 0) {
-                        state.charElements[state.currentIndex]?.classList.remove('cursor');
-                        state.currentIndex--;
-                        const prevElement = state.charElements[state.currentIndex];
-                        prevElement.classList.remove('correct', 'incorrect');
-                        prevElement.classList.add('cursor');
-                        elements.userInput.value = elements.userInput.value.slice(0, -1);
+                currentWordElement.innerHTML = ''; // Clear and rebuild
+                for (let i = 0; i < currentWordText.length; i++) {
+                    const charSpan = document.createElement('span');
+                    charSpan.className = 'char';
+                    charSpan.textContent = currentWordText[i];
+                    if (i < typedValue.length) {
+                        if (typedValue[i] === currentWordText[i]) {
+                            charSpan.classList.add('correct');
+                        } else {
+                            charSpan.classList.add('incorrect');
+                        }
                     }
+                    currentWordElement.appendChild(charSpan);
                 }
-                
-                if (e.key === 'Tab') {
-                    e.preventDefault();
-                    const start = e.target.selectionStart;
-                    const end = e.target.selectionEnd;
-                    e.target.value = e.target.value.substring(0, start) + '\t' + e.target.value.substring(end);
-                    e.target.selectionStart = e.target.selectionEnd = start + 1;
-                    
-                    const inputEvent = new Event('input', { bubbles: true });
-                    e.target.dispatchEvent(inputEvent);
-                }
-            };
+            }
+        };
+
+        const validateWord = () => {
+            const typedWord = userInput.value.trim().normalize('NFC');
+            if (typedWord === '' && !userInput.value.includes(' ')) return;
+
+            const currentWord = state.words[state.currentWordIndex].normalize('NFC');
+            const wordSpan = wordsWrapper.children[state.currentWordIndex];
             
-            const startTimer = () => {
-                const isInfinite = parseInt(elements.durationSelect.value, 10) === 0;
-                
-                state.timerInterval = setInterval(() => {
-                    if (isInfinite) {
-                        state.timeRemaining++;
-                    } else {
-                        state.timeRemaining--;
-                    }
-                    
-                    updateTimeDisplay();
-                    updateStats();
-                    
-                    if (!isInfinite && state.timeRemaining <= 0) {
-                        endGame();
-                    }
-                }, 1000);
-            };
+            wordSpan.classList.remove('current');
+            state.totalTypedChars += currentWord.length + 1; // +1 for the space
 
-            const updateStats = () => {
-                const timeElapsed = (Date.now() - state.startTime) / 1000 / 60; // in minutes
-                if (timeElapsed > 0) {
-                    const wpm = Math.round((state.correctTyped / 5) / timeElapsed) || 0;
-                    const cpm = Math.round(state.correctTyped / timeElapsed) || 0;
-                    const accuracy = state.totalTyped > 0 ? Math.round((state.correctTyped / state.totalTyped) * 100) : 100;
-                    updateStatsDisplay(wpm, cpm, accuracy);
-                }
-            };
+            if (typedWord === currentWord) {
+                wordSpan.classList.add('correct');
+                state.correctTypedChars += currentWord.length + 1;
+                state.correctTypedWords++;
+            } else {
+                wordSpan.classList.add('incorrect');
+            }
+
+            state.currentWordIndex++;
+
+            const isLongTest = state.duration === 0 || state.duration > 180;
+            const wordsRemaining = state.words.length - state.currentWordIndex;
             
-            const updateStatsDisplay = (wpm, cpm, accuracy) => {
-                elements.wpmValue.textContent = wpm;
-                elements.cpmValue.textContent = cpm;
-                elements.accuracyValue.textContent = `${accuracy}%`;
-            };
+            if (isLongTest && !state.isFetchingNextBatch && wordsRemaining < 40) {
+                fetchAndAppendText();
+            }
 
-            const updateTimeDisplay = () => {
-                const minutes = Math.floor(state.timeRemaining / 60);
-                const seconds = state.timeRemaining % 60;
-                elements.timeValue.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            };
+            if (state.currentWordIndex >= state.words.length) {
+                if (!isLongTest) endGame(); 
+                return;
+            }
 
-            const updateUIForState = () => {
-                if (state.gameState === 'running') {
-                    elements.startButton.textContent = 'Stop';
-                    elements.startButton.style.backgroundColor = 'var(--incorrect-color)';
-                    elements.optionsBar.querySelectorAll('select').forEach(s => s.disabled = true);
-                } else {
-                    elements.startButton.textContent = 'Start';
-                    elements.startButton.style.backgroundColor = 'var(--primary-color)';
-                    elements.optionsBar.querySelectorAll('select').forEach(s => s.disabled = false);
-                }
-            };
+            const nextWordSpan = wordsWrapper.children[state.currentWordIndex];
+            nextWordSpan.classList.add('current');
+            nextWordSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
             
-            const showResults = () => {
-                const timeElapsed = (state.startTime > 0) ? (Date.now() - state.startTime) / 1000 / 60 : 0;
-                const wpm = (timeElapsed > 0) ? Math.round((state.correctTyped / 5) / timeElapsed) : 0;
-                const cpm = (timeElapsed > 0) ? Math.round(state.correctTyped / timeElapsed) : 0;
-                const accuracy = state.totalTyped > 0 ? Math.round((state.correctTyped / state.totalTyped) * 100) : 100;
+            userInput.value = '';
+        };
 
-                elements.finalWpm.textContent = wpm;
-                elements.finalCpm.textContent = cpm;
-                elements.finalAccuracy.textContent = `${accuracy}%`;
-                elements.finalChars.textContent = `${state.correctTyped} / ${state.totalTyped}`;
-                
-                elements.resultsModal.classList.add('visible');
-            };
+        const calculateStats = () => {
+            if (state.startTime === 0) return;
+            const timeElapsedInSeconds = (Date.now() - state.startTime) / 1000;
+            if (timeElapsedInSeconds > 0) {
+                const timeElapsedInMinutes = timeElapsedInSeconds / 60;
+                state.wpm = Math.round(state.correctTypedWords / timeElapsedInMinutes) || 0;
+                state.cpm = Math.round(state.correctTypedChars / timeElapsedInMinutes) || 0;
+                state.pages = state.correctTypedWords / 250;
+            }
+            state.accuracy = state.totalTypedChars > 0 ? Math.round((state.correctTypedChars / state.totalTypedChars) * 100) : 100;
+        };
+        
+        const init = () => {
+            copyrightYear.textContent = new Date().getFullYear();
+            loadPreferences();
+            updateTimeDisplay();
+            updateSubjectTranslations();
+            
+            userInput.addEventListener('input', handleInput);
+            startButton.addEventListener('click', () => state.gameState === 'running' ? resetGame() : startGame());
+            stopButton.addEventListener('click', endGame);
+            languageSelect.addEventListener('change', (e) => {
+                state.language = e.target.value;
+                updateSubjectTranslations();
+                savePreferences();
+            });
+            durationSelect.addEventListener('change', (e) => {
+                state.duration = parseInt(e.target.value, 10);
+                state.timeRemaining = state.duration;
+                updateTimeDisplay();
+                savePreferences();
+            });
+            contentTypeSelect.addEventListener('change', (e) => { state.contentType = e.target.value; savePreferences(); });
+            subjectSelect.addEventListener('change', (e) => { state.subject = e.target.value; savePreferences(); });
+            ageRange.addEventListener('input', (e) => {
+                state.age = e.target.value;
+                ageValue.textContent = state.age;
+                savePreferences();
+            });
+            
+            themeSwitcher.addEventListener('click', switchTheme);
+            loadTheme();
+        };
 
-            const hideResults = () => {
-                elements.resultsModal.classList.remove('visible');
-            };
-
-            const switchTheme = () => {
-                state.currentThemeIndex = (state.currentThemeIndex + 1) % state.themes.length;
-                const newTheme = state.themes[state.currentThemeIndex];
-                elements.body.dataset.theme = newTheme;
-                localStorage.setItem('codeTypingTheme', newTheme);
-            };
-
-            const loadTheme = () => {
-                const savedTheme = localStorage.getItem('codeTypingTheme') || 'ocean';
-                state.currentThemeIndex = state.themes.indexOf(savedTheme);
-                if (state.currentThemeIndex === -1) state.currentThemeIndex = 0;
-                elements.body.dataset.theme = state.themes[state.currentThemeIndex];
-            };
-
-            // --- INITIALIZATION ---
-            init();
-        });
+        init();
+    });
     </script>
 </body>
 </html>
